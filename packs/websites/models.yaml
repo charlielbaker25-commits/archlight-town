@@ -1,0 +1,39 @@
+# Model routing for the website business (BLUEPRINT 12.2).
+# Agent code never names a model: it asks for its agent's tier here.
+# Route "api" = the Anthropic API key (Haiku only, enforced in engine/models.py).
+# Route "claude_cli" = `claude -p` on Charlie's subscription, with ANTHROPIC_API_KEY removed.
+
+tiers:
+  fast:
+    model: claude-haiku-5-5
+    route: api
+    # Dollars per million tokens, used for cost logging (prompts up to 100K tokens)
+    input_usd_per_mtok: 0.10
+    output_usd_per_mtok: 0.50
+  balanced:
+    model: claude-sonnet-5-5
+    route: claude_cli
+  strongest:
+    model: claude-opus-5-5
+    route: claude_cli
+
+agents:
+  mayor: fast
+  scout: fast
+  inspector: fast
+  guard: fast
+  messenger: balanced
+  # Clerk-lite (Charlie, 2026-11-03): plain code first, Haiku through the API only for replies code couldn't sort,
+  # and only when there's new mail. Never Sonnet, never `claude -p`.
+  clerk: fast
+  caretaker: balanced
+  herald: balanced
+  # Reaper's chat and sit-rep wording: Haiku through the API (Charlie, 2026-10-27). Heavy analysis
+  # on request would go through `claude -p` later; not built yet.
+  jarvis: fast
+  # Reaper's deep analysis on request ("what's working?"): Sonnet through `claude -p`, read-only.
+  jarvis_analysis: balanced
+  builder: strongest
+  critic: strongest
+  librarian: strongest
+  treasurer: strongest

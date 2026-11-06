@@ -1,0 +1,199 @@
+---
+// THE STARTER PAGE. It already builds a complete, honest preview from brief.json: header, hero, services,
+// the sample sections (gallery, story, reviews, hours, booking, map), a closing call band and a footer.
+// It is a floor, not the design: the Builder rewrites it into this business's own look (palette, type,
+// layout, copy, drawings) and keeps every rule in its instructions.
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/instrument-sans";
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Gallery from "../components/samples/Gallery.astro";
+import Story from "../components/samples/Story.astro";
+import Reviews from "../components/samples/Reviews.astro";
+import Hours from "../components/samples/Hours.astro";
+import BookOnline from "../components/samples/BookOnline.astro";
+import MapCard from "../components/samples/MapCard.astro";
+import brief from "../../brief.json";
+
+const b = brief.business;
+const kind = (b.type || "local business").replace(/_/g, " ");
+const services: string[] = b.core_services ?? [];
+const town = (b.address_exactly.split(",").slice(-2, -1)[0] || b.area || "").trim();
+
+// Photos: the business's own (copied from their site) come first; otherwise the licensed sample photos.
+const theirs = Object.values(import.meta.glob<{ default: any }>("../assets/their-photos/*.{jpg,jpeg,png,webp}", { eager: true })).map((m) => m.default);
+const samples = Object.values(import.meta.glob<{ default: any }>("../assets/sample-photos/*.{jpg,jpeg,png,webp}", { eager: true })).map((m) => m.default);
+const sampleInfo: { shows: string }[] = (brief as { sample_photos?: { shows: string }[] }).sample_photos ?? [];
+const samplePhotos = samples.map((src, i) => ({ src, alt: `Sample photo: ${sampleInfo[i]?.shows ?? kind}` }));
+
+const links = [
+  ...(services.length ? [{ href: "#services", label: "Services" }] : []),
+  { href: "#gallery", label: "Gallery" },
+  { href: "#story", label: "Story" },
+  { href: "#visit", label: "Visit" },
+];
+---
+<Base title={`${b.name} | ${kind} in ${town || b.area}`} description={`${b.name}, a ${kind} in ${town || b.area}.`} business={b.name}>
+  <Header business={b.name} phoneDisplay={b.phone_display} phoneTel={b.phone_tel_link} links={links} />
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{kind} · {town || b.area}</p>
+          <h1>{b.name}</h1>
+          <p class="hero-line">A {kind} in {town || b.area}. Call, or stop by:</p>
+          <p class="hero-address">{b.address_exactly}</p>
+          <div class="hero-actions">
+            {b.phone_display && <a class="btn btn-solid whitespace-nowrap" href={b.phone_tel_link}>Call {b.phone_display}</a>}
+            <BookOnline id="booking-hero" phoneDisplay={b.phone_display} phoneTel={b.phone_tel_link} class="btn btn-ghost" />
+          </div>
+        </div>
+        {!(samplePhotos[0] && theirs.length === 0) && (
+          <div class="hero-art" aria-hidden="true">
+            <svg viewBox="0 0 400 440" width="400" height="440" focusable="false">
+              <defs>
+                <linearGradient id="arch-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--color-accent-2)" /><stop offset="1" stop-color="var(--color-accent)" /></linearGradient>
+                <linearGradient id="arch-b" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="var(--color-accent-3)" /><stop offset="1" stop-color="var(--color-accent-2-soft)" /></linearGradient>
+              </defs>
+              <path d="M40 440V200a120 120 0 0 1 240 0v240Z" fill="url(#arch-a)" />
+              <path d="M180 440V250a100 100 0 0 1 200 0v190Z" fill="url(#arch-b)" opacity="0.9" />
+              <circle cx="300" cy="80" r="46" fill="var(--color-accent-soft)" />
+              <circle cx="90" cy="70" r="14" fill="var(--color-accent)" />
+            </svg>
+          </div>
+        )}
+        {samplePhotos[0] && theirs.length === 0 && (
+          <figure class="hero-photo" data-sample-photo>
+            <Image src={samplePhotos[0].src} alt={samplePhotos[0].alt} widths={[420, 720]} sizes="(min-width: 900px) 40vw, 90vw" loading="eager" />
+            <figcaption>Sample photo</figcaption>
+          </figure>
+        )}
+      </div>
+    </section>
+
+    {services.length > 0 && (
+      <section id="services" class="section">
+        <div class="wrap">
+          <h2 class="reveal">What we do</h2>
+          <ol class="services" role="list">
+            {services.map((service, i) => (
+              <li class="reveal" style={`--delay:${i * 70}ms`}>
+                <span class="service-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <span class="service-name">{service}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )}
+
+    <div class="section band">
+      <div class="wrap">
+        {theirs.length > 0 ? (
+          <section id="gallery" aria-labelledby="their-photos">
+            <h2 id="their-photos">From your current site</h2>
+            <ul class="their-grid" role="list">
+              {theirs.map((src) => <li><Image src={src} alt={`${b.name}`} widths={[360, 720]} sizes="(min-width: 900px) 30vw, 90vw" loading="lazy" /></li>)}
+            </ul>
+          </section>
+        ) : (
+          <Gallery photos={samplePhotos} />
+        )}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <Story business={b.name} />
+      </div>
+    </div>
+
+    <div class="section band">
+      <div class="wrap">
+        <Reviews />
+      </div>
+    </div>
+
+    <section id="visit" class="section" aria-labelledby="visit-title">
+      <div class="wrap">
+        <h2 id="visit-title" class="reveal">Visit</h2>
+        <div class="visit-grid">
+          <div class="reveal"><MapCard address={b.address_exactly} business={b.name} /></div>
+          <div class="reveal visit-side">
+            <Hours />
+            <div class="contact">
+              {b.phone_display && <a class="whitespace-nowrap" href={b.phone_tel_link}>{b.phone_display}</a>}
+              {b.public_email && <a href={`mailto:${b.public_email}`}>{b.public_email}</a>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap cta-inner reveal">
+        <h2 id="cta-title">Ready when you are.</h2>
+        <div class="hero-actions">
+          {b.phone_display && <a class="btn btn-solid whitespace-nowrap" href={b.phone_tel_link}>Call {b.phone_display}</a>}
+          <BookOnline id="booking-cta" phoneDisplay={b.phone_display} phoneTel={b.phone_tel_link} class="btn btn-ghost" />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer business={b.name} area={b.area} address={b.address_exactly} phoneDisplay={b.phone_display} phoneTel={b.phone_tel_link} email={b.public_email} links={links} />
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 2rem + 7vw, 8rem);
+    background:
+      radial-gradient(60% 80% at 10% 10%, var(--color-accent-soft) 0%, transparent 60%),
+      radial-gradient(55% 70% at 95% 20%, var(--color-accent-2-soft) 0%, transparent 60%),
+      radial-gradient(70% 70% at 70% 100%, var(--color-accent-3-soft) 0%, transparent 60%),
+      var(--color-paper);
+  }
+  .hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.3fr 1fr; } }
+  .eyebrow { margin: 0 0 1rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); }
+  h1 { margin: 0; font-size: clamp(2.6rem, 1.6rem + 5vw, 5.5rem); line-height: 0.98; animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero-line { margin: 1.4rem 0 0.2rem; font-size: 1.15rem; max-width: 34rem; }
+  .hero-address { margin: 0; font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .hero-photo { margin: 0; }
+  .hero-art { display: none; }
+  @media (min-width: 900px) { .hero-art { display: block; justify-self: end; animation: float-in 1.1s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both; } }
+  .hero-art svg { display: block; width: min(100%, 26rem); height: auto; }
+  @keyframes float-in { from { opacity: 0; transform: translateY(30px) scale(0.97); } to { opacity: 1; transform: none; } }
+  .hero-photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1.5rem; }
+  .hero-photo figcaption { margin-top: 0.4rem; font-size: 0.75rem; font-weight: 600; color: var(--color-muted); }
+  @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
+
+  :global(.btn) { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease; }
+  :global(.btn:hover) { transform: translateY(-2px); }
+  :global(.btn-solid) { background: var(--color-ink); color: var(--color-paper); border: 2px solid var(--color-ink); }
+  :global(.btn-ghost) { background: transparent; color: var(--color-ink); border: 2px solid var(--color-ink); }
+
+  .services { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid color-mix(in oklab, var(--color-ink) 15%, transparent); }
+  @media (min-width: 760px) { .services { grid-template-columns: 1fr 1fr; column-gap: 3rem; } }
+  .services li { display: flex; align-items: baseline; gap: 1.2rem; padding: 1.1rem 0; border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 15%, transparent); }
+  .service-number { font-family: var(--font-display); color: var(--color-accent); font-size: 1rem; font-weight: 600; }
+  .service-name { font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); font-family: var(--font-display); text-transform: capitalize; }
+
+  .band { background: var(--color-paper-2); }
+  .their-grid { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+  .their-grid :global(img) { width: 100%; height: auto; border-radius: 1rem; }
+
+  .visit-grid { display: grid; gap: 2.5rem; margin-top: 2rem; }
+  @media (min-width: 900px) { .visit-grid { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+  .visit-side { display: grid; gap: 2rem; }
+  .contact { display: grid; gap: 0.25rem; font-weight: 700; font-size: 1.1rem; }
+  .contact a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  .cta { padding-block: clamp(4rem, 3rem + 4vw, 6rem); background: linear-gradient(120deg, var(--color-accent-soft), var(--color-accent-2-soft) 50%, var(--color-accent-3-soft)); }
+  .cta-inner { display: grid; justify-items: center; text-align: center; }
+  .cta-inner h2 { margin: 0; }
+</style>

@@ -1,0 +1,195 @@
+---
+import Base from "../layouts/Base.astro";
+import Gallery from "../components/samples/Gallery.astro";
+import Story from "../components/samples/Story.astro";
+import Reviews from "../components/samples/Reviews.astro";
+import BookOnline from "../components/samples/BookOnline.astro";
+import MapCard from "../components/samples/MapCard.astro";
+
+const name = "Brightwater Family Dentistry";
+const phoneDisplay = "(314) 555-0107";
+const phoneTel = "tel:+13145550107";
+const email = "brightwaterdental@example.com";
+
+const services = [
+  "Cleanings and Exams",
+  "Fillings",
+  "Crowns and Bridges",
+  "Teeth Whitening",
+  "Children's Dentistry",
+];
+
+const hours = [
+  { days: "Mon - Thu", time: "8:00 - 5:00" },
+  { days: "Fri", time: "8:00 - 1:00" },
+  { days: "Sat - Sun", time: "Closed" },
+];
+
+// One crest of the waterline; drawn twice side by side so it can roll without a seam.
+const wave = "M0 30 C 100 0 200 0 300 30 S 500 60 600 30 S 800 0 900 30 S 1100 60 1200 30 V80 H0 Z";
+---
+<Base
+  title="Brightwater Family Dentistry | Florissant, MO"
+  description="General and family dentistry in Florissant, Missouri. Call (314) 555-0107."
+  business={name}
+>
+  <header class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
+    <a href="#main" class="flex items-center gap-2.5 no-underline">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <circle cx="17" cy="15" r="11" fill="#f6c64a" />
+        <path d="M2 22 Q 9.5 17 17 22 T 32 22 V34 H2 Z" fill="#1e6f76" />
+      </svg>
+      <span class="font-display text-lg leading-tight font-bold">Brightwater<span class="sr-only"> Family Dentistry</span></span>
+    </a>
+    <nav aria-label="Sections" class="ml-auto hidden lg:block">
+      <ul class="flex gap-6 font-semibold" role="list">
+        <li><a href="#services-title" class="inline-flex min-h-11 items-center no-underline hover:underline">Services</a></li>
+        <li><a href="#gallery" class="inline-flex min-h-11 items-center no-underline hover:underline">The office</a></li>
+        <li><a href="#story" class="inline-flex min-h-11 items-center no-underline hover:underline">Our story</a></li>
+        <li><a href="#visit-title" class="inline-flex min-h-11 items-center no-underline hover:underline">Visit</a></li>
+      </ul>
+    </nav>
+    <a href={phoneTel} class="btn btn-line min-h-11! px-4! py-2! text-sm">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2" /></svg>
+      <span class="hidden sm:inline">Call</span> {phoneDisplay}
+    </a>
+  </header>
+
+  <main id="main">
+    <section class="relative overflow-hidden" aria-labelledby="hero-title">
+      <svg class="sun pointer-events-none absolute -right-20 bottom-4 w-[16rem] sm:-right-10 sm:bottom-10 sm:w-[30rem] lg:right-[6%] lg:w-[34rem]" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="100" fill="#f6c64a" />
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#ffd667" stroke-width="6" />
+      </svg>
+
+      <div class="relative mx-auto max-w-6xl px-5 pt-10 pb-44 sm:px-8 sm:pt-16 sm:pb-56">
+        <p class="mb-5 text-base font-semibold text-tide">Family dentistry in Florissant, Missouri</p>
+        <h1 id="hero-title" class="max-w-[11ch] text-[clamp(2.9rem,12vw,6.5rem)] font-extrabold">
+          Gentle care for the whole family.
+        </h1>
+        <p class="mt-6 max-w-[34ch] text-lg sm:text-xl">
+          Our caring team provides general and family dentistry in a comfortable, relaxed setting.
+          We look forward to meeting you!
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={phoneTel} class="btn btn-sun">Call {phoneDisplay}</a>
+          <BookOnline id="booking-hero" phoneDisplay={phoneDisplay} phoneTel={phoneTel} label="Book a visit online" class="btn btn-line bg-rinse/80" />
+        </div>
+      </div>
+
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-28 sm:h-36" aria-hidden="true">
+        <div class="absolute inset-x-0 bottom-6 h-full overflow-hidden opacity-60">
+          <div class="wave-track slow h-full">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d={wave} fill="#2e8c93" /></svg>
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d={wave} fill="#2e8c93" /></svg>
+          </div>
+        </div>
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="wave-track h-full">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d={wave} fill="#12324a" /></svg>
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d={wave} fill="#12324a" /></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="on-dark bg-ink text-rinse" aria-labelledby="services-title">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1fr_1.4fr]">
+        <div>
+          <h2 id="services-title" class="text-[clamp(2.2rem,7vw,3.75rem)] font-bold">Our services</h2>
+          <p class="mt-5 max-w-[36ch] text-foam">
+            General and family dentistry in a comfortable, relaxed setting, with care for children
+            too.
+          </p>
+        </div>
+        <ul class="divide-y divide-rinse/20 border-y border-rinse/20">
+          {services.map((service) => (
+            <li class="flex items-center gap-4 py-5">
+              <svg class="shrink-0" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+                <path d="M13 2 C 13 2 4 12 4 17 a9 9 0 0 0 18 0 C 22 12 13 2 13 2 Z" fill="#f6c64a" />
+              </svg>
+              <span class="font-display text-[clamp(1.4rem,5vw,2rem)] leading-tight font-semibold">{service}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <div class="bg-foam/60">
+      <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <Gallery heading="Inside the office" tiles={["The waiting room", "A treatment room", "Your team", "Kids' corner", "The front desk", "Outside the office"]} />
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      <Story business={name} heading="Our story" />
+    </div>
+
+    <div class="on-dark bg-ink text-rinse">
+      <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <Reviews heading="What families say" />
+      </div>
+    </div>
+
+    <section aria-labelledby="visit-title" class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      <h2 id="visit-title" class="text-[clamp(2.2rem,7vw,3.75rem)] font-bold">Plan your visit</h2>
+
+      <div class="mt-10 grid gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          <h3 class="text-2xl font-bold">Office hours</h3>
+          <dl class="hours mt-4 max-w-md text-lg">
+            {hours.map((row) => (
+              <div>
+                <dt>{row.days}</dt>
+                <dd>{row.time}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="mt-4 max-w-md rounded-2xl bg-foam px-4 py-3 font-semibold">
+            Please call to confirm hours before your visit.
+          </p>
+
+          <h3 class="mt-12 text-2xl font-bold">Insurance</h3>
+          <p class="mt-3 max-w-[44ch]">We accept most major plans. Please call to confirm.</p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold">Find us</h3>
+          <div class="mt-4"><MapCard address="1450 N New Florissant Rd, Florissant, MO 63033" business={name} /></div>
+
+          <h3 class="mt-12 text-2xl font-bold">Request an appointment</h3>
+          <p class="mt-3 max-w-[44ch]">To request an appointment, call or email the office.</p>
+          <div class="mt-5"><BookOnline id="booking-visit" phoneDisplay={phoneDisplay} phoneTel={phoneTel} label="Book a visit online" class="btn btn-line" /></div>
+          <ul class="mt-6 space-y-3 text-lg">
+            <li>
+              <a href={phoneTel} class="font-semibold text-tide underline decoration-2 underline-offset-4 hover:decoration-sun">{phoneDisplay}</a>
+            </li>
+            <li>
+              <a href={`mailto:${email}`} class="font-semibold break-all text-tide underline decoration-2 underline-offset-4 hover:decoration-sun">{email}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="on-dark bg-ink text-rinse">
+    <div class="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-8 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-bold">{name}</p>
+        <p class="mt-1 text-foam">Family dentistry in Florissant, Missouri</p>
+      </div>
+      <div class="grid content-start gap-1 text-foam">
+        <p class="m-0">1450 N New Florissant Rd, Florissant, MO 63033</p>
+        <a href={phoneTel} class="inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-rinse">{phoneDisplay}</a>
+        <a href={`mailto:${email}`} class="inline-flex min-h-11 items-center break-all font-semibold text-rinse">{email}</a>
+      </div>
+      <ul class="grid content-start gap-1 font-semibold" role="list">
+        <li><a href="#services-title" class="inline-flex min-h-11 items-center">Services</a></li>
+        <li><a href="#gallery" class="inline-flex min-h-11 items-center">The office</a></li>
+        <li><a href="#story" class="inline-flex min-h-11 items-center">Our story</a></li>
+        <li><a href="#visit-title" class="inline-flex min-h-11 items-center">Visit</a></li>
+      </ul>
+    </div>
+  </footer>
+</Base>

@@ -1,0 +1,13 @@
+worth_pursuing: no
+scout: reject
+reject_reason: >-
+  A franchise location (brand name plus a store number). It uses the corporate website and
+  can't buy its own site, so there's no one here to sell to. Franchise locations are a common
+  false lead in Overture data.
+contact_route: none
+site_problems: not_inspected
+site_notes: >-
+  Not inspected. Rejected leads never reach the Inspector. On paper it looks like a "no website"
+  prospect; the brand name and "#214" are the giveaways.
+good_draft:
+  - No draft. Reject the lead.

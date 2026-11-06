@@ -1,0 +1,57 @@
+{
+  "source": "fictional test-set Town; scripted clients; no external requests",
+  "case": "07-dentist-outdated; c1-good-dentist frozen preview",
+  "width": 1440,
+  "fixture_package": "Guard clear; approved fake homepage; real Messenger assembly; prospect package proposed only",
+  "clear_package_media": [
+    "needs-you.png",
+    "sites.png",
+    "town-hall.gif"
+  ],
+  "preview_links": "fictional tokens redacted from displayed text only; backend token binding unchanged",
+  "flow": "staged build_done fixture event through the production Town Hall renderer",
+  "sha256": {
+    "catch-me-up.png": [
+      "0c61faeaafff0414",
+      "71724d5d9f131c1b",
+      "7b4ea8fc5369c4b2",
+      "4f9a82ac967a9f21"
+    ],
+    "needs-you.png": [
+      "a8eda864438225cd",
+      "66a87d59bf05de55",
+      "c24fa54e87e57d04",
+      "4d63401a16d67a3f"
+    ],
+    "preview.png": [
+      "59700fce5d20082e",
+      "08a850ebdde5e7ae",
+      "654c7bce5c885915",
+      "cc445485939ad930"
+    ],
+    "reaper.png": [
+      "8328496d3b14c5a6",
+      "6fbe8b42ed32579f",
+      "d0e605330386d097",
+      "b70df898a49ab83c"
+    ],
+    "sites.png": [
+      "cd438d7112f409a7",
+      "5b4ad35b284613dc",
+      "17ebd39124ef0674",
+      "ed5160ee21482124"
+    ],
+    "village.png": [
+      "5501b654e6fd437b",
+      "2dc2c9394bc46f23",
+      "642ba3b9bd1a9f91",
+      "9b369a3d8486f70c"
+    ],
+    "town-hall.gif": [
+      "a9829df9d7535aa2",
+      "715a4c0a993aa30e",
+      "7dc8f6cb448190b0",
+      "22813ffd18cb215a"
+    ]
+  }
+}

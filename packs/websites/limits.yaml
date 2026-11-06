@@ -1,0 +1,202 @@
+# Every operating limit for the website business (BLUEPRINT 4.5).
+# This file is the ONLY place limits live. Never copy these numbers into code.
+# Changing any value is a proposal Charlie approves, and it is logged.
+
+money:
+  # Monthly budget until revenue. At the cap, paid work pauses and a cap-raise request goes to Charlie.
+  total_monthly_cap_usd: 25.00
+  # The Town's own count of Claude API spend. Sits just under the Console's $10 hard limit.
+  api_monthly_cap_usd: 9.00
+  # Heads-up at this share of either cap ($7.20 API, $20 total)
+  early_warning_fraction: 0.80
+  # For reference only: set in the Claude Console, and only Charlie changes it there.
+  console_api_limit_usd: 10.00
+  # A cap-raise request suggests raising the cap by this much. Charlie can edit the amount before approving.
+  cap_raise_step_usd: 1.00
+
+email:
+  # From the Town's own Gmail only, including follow-ups
+  sends_per_day: 20
+  follow_ups_per_lead: 2
+  follow_up_min_days_apart: 4
+  # Pause all outreach above this bounce rate over the last N sends, or on any spam complaint
+  bounce_rate_pause: 0.05
+  bounce_rate_window_sends: 50
+  spam_complaints_before_pause: 1
+
+golive:
+  # Real sending can be switched on (`town golive`, Charlie only) after this many shadow days: days the whole
+  # Town ran the full loop in dry-run, every draft in Gmail for Charlie to review (Charlie, 2026-11-03: 3, not 7).
+  shadow_days_required: 3
+  # Go-live's checklist wants email.sends_per_day at or below this for the start (deliverability warm-up; Charlie
+  # lowers sends_per_day with an approved `town limit` change, then raises it later the same way).
+  warmup_sends_per_day: 5
+
+autopilot:
+  # `town autopilot` runs one cycle (inbox, inspect, build, drafts, follow-ups, Scout) this often.
+  cycle_minutes: 30
+  # While autopilot runs, Charlie's approval starts a short cycle (inspect, build, first emails) within this many
+  # seconds, so work moves right after a decision. (Charlie, 2026-11-04)
+  react_seconds: 60
+  # Sites autopilot starts in a day (every build counts, manual ones too). Never above building.sites_per_day:
+  # the lower of the two applies.
+  builds_per_day: 3
+  # Autopilot runs `town scout --auto` once in a cycle only when fewer than this many saved leads are waiting to
+  # be built AND no new-lead proposal is waiting for Charlie.
+  leads_waiting_min: 3
+
+clerk:
+  # The Clerk reads replies on Town threads from the last this-many days (older threads are left alone).
+  thread_days: 30
+  # At most this many new messages handled in one inbox check (the rest wait for the next one).
+  messages_per_check: 50
+  # At most this many Haiku calls in one inbox check (only for replies plain code couldn't sort; the rest go
+  # to Charlie as "reply needs Charlie", the safe side).
+  haiku_per_check: 10
+  # `town inbox --watch` checks this often while the Town is running.
+  check_every_minutes: 60
+
+messenger:
+  # A first email's message (not counting the footer the Town adds: sign-off, opt-out line, address)
+  max_email_words: 120
+  # A follow-up is shorter than the first email
+  max_follow_up_words: 80
+  # A call script's opener is what Charlie says in the first 20 seconds; the voicemail version is short too
+  max_opener_words: 70
+  max_voicemail_words: 80
+  # A draft that breaks a rule goes back to the same Messenger session this many times; then there's no draft
+  fix_rounds: 1
+  # One draft (every `claude -p` round together) is ended after this long
+  draft_timeout_minutes: 10
+
+leads:
+  # Scout stops for the day at this many new leads
+  new_leads_per_day: 50
+  # How many leads one Scout run proposes
+  proposals_per_scout_run: 5
+  # Skip Overture places below this confidence score (0 to 1)
+  min_confidence: 0.70
+
+inspector:
+  # The Inspector stops for the day after this many inspections
+  inspections_per_day: 25
+  # A lead is worth building a sample site for at this need score or above (0 to 100)
+  build_worthy_score: 40
+  # Pages fetched per site: the homepage plus up to (this - 1) of its internal links
+  max_pages_per_site: 4
+  # How long to wait for one page (or one link check) before giving up
+  page_timeout_seconds: 20
+  # How long one Lighthouse run may take
+  lighthouse_timeout_seconds: 120
+  # "slow" when Lighthouse's mobile performance score is below this (0 to 100)
+  lighthouse_slow_below: 50
+  # ...or when the largest image or text block takes longer than this to show on a phone
+  # (Lighthouse's Largest Contentful Paint; Google calls anything over 4 seconds "poor")
+  lighthouse_slow_lcp_seconds: 4.0
+  # Only if Lighthouse can't run: "slow" when the homepage and its files weigh more than this
+  heavy_page_kb: 1000
+  # "outdated" when the newest copyright year is at least this many years old
+  outdated_after_years: 5
+
+building:
+  # Builder, only for leads above the score threshold. Counts every build started today on this
+  # instance (test-set builds too), since each one uses Charlie's Claude plan usage.
+  sites_per_day: 5
+  # One build (every `claude -p` round together) is ended after this long
+  build_timeout_minutes: 30
+  # If the site doesn't compile or breaks a source rule, Builder gets this many chances to fix it
+  fix_rounds: 2
+  # After a Claude plan usage-limit error with no reset time given, subscription jobs wait this long
+  usage_limit_wait_minutes: 60
+  # A built site's Lighthouse scores on a phone (0 to 100) must reach these in `town testset --agents builder`
+  min_lighthouse_performance: 90
+  min_lighthouse_accessibility: 95
+  # After a Critic fail, the Builder's own session gets the must-fix list back at most this many times.
+  # Then the build is critic_failed and nothing is proposed. Send-backs count as the same site for
+  # sites_per_day.
+  critic_send_backs: 2
+  # Licensed sample photos (packs/websites/photo_library/) copied into one preview, each labeled "Sample
+  # photo", and the biggest library file accepted (download a ~1920px size). (Charlie, 2026-11-02)
+  sample_photos_per_site: 6
+  max_sample_photo_kb: 1500
+
+critic:
+  # One Critic review (its `claude -p` run) is ended after this long
+  review_timeout_minutes: 15
+  # A build passes only if every Critic score (1 to 5) is at least this...
+  min_score: 3
+  # ...and honesty is at least this (5 = every claim sourced, 4 = sourced but a published fact left out,
+  # 3 or below = something invented). An invented claim or any must-fix item fails the build anyway.
+  min_honesty: 4
+  # "Would the owner want this?" (1 to 5: richness, specific to the trade, the wow factor). A preview
+  # scoring below this fails, however clean it is. (Charlie, 2026-11-02, after build #8)
+  min_owner_wants: 4
+  # A faint decorative graphic (marked decorative, e.g. aria-hidden) BEHIND text is allowed when it shows
+  # at less than this opacity (0 to 1): a watermark. Anything on top of text, or stronger, fails the
+  # build. The text's contrast is still checked by axe-core. (Charlie, 2026-10-26)
+  decorative_max_opacity: 0.2
+
+librarian:
+  # Never a lesson without evidence (BLUEPRINT 5.7). A lesson needs at least this many decisions or results
+  # behind it, every one cited...
+  min_evidence_count: 3
+  # ...and at least this share of the comparable ones (e.g. 3 of 4 = 75% passes; 3 of 10 doesn't).
+  min_evidence_share: 0.6
+  # At most this many new lessons from one review (short playbooks get followed).
+  max_lessons_per_review: 5
+  # How much of the log one review reads (newest first).
+  max_evidence_items: 400
+  # One review (its `claude -p` run) is ended after this long.
+  review_timeout_minutes: 15
+  # A playbook change runs that agent's test set this many times with and without the change (averaged).
+  gate_runs: 1
+  # A playbook never grows past this many lines (about 30, BLUEPRINT 5.7).
+  playbook_max_lines: 30
+
+explore:
+  # `town scout --auto`: the share of runs that go to proven business types and areas; the rest explore new
+  # ones (BLUEPRINT 5.4, about 70/30). Charlie can change it like any limit.
+  exploit_share: 0.7
+  # A type-and-area cell is judged (can count as proven) only after this many leads.
+  min_tries_to_judge: 5
+  # `town scout --auto` never picks a type-and-area cell with fewer than this many Overture candidates that would
+  # pass Scout's own filters (confidence, reachable, not already known, the captive/lead-gen screen, and email-first:
+  # a public email). Counted in plain code from the local file, no model call. (Charlie, 2026-11-04)
+  min_candidates: 3
+
+previews:
+  # A published preview comes down automatically this many days after it went live (checked whenever the
+  # Town starts or runs, never while it's stopped).
+  expire_days: 21
+  # Cloudflare Pages' free plan allows 500 deploys a month. Every publish and every takedown is one
+  # deploy; the Town stops at this many, leaving room for Charlie's own.
+  deploys_per_month: 450
+  # Cloudflare Pages' free-plan limits for one upload (direct upload with Wrangler).
+  max_files_per_deploy: 20000
+  max_file_mb: 25
+  # The outreach package (2026-11-05) checks its preview really answers before the email goes: this many plain
+  # HTTP tries, this many seconds apart (Cloudflare can take a few seconds to serve a new deploy). A read only.
+  live_check_tries: 6
+  live_check_wait_seconds: 10
+
+reaper:
+  # Model turns per day for Reaper's chat (terminal and page together), counted from Charlie's local midnight.
+  # At the cap Reaper answers from plain code only (status, queue, "approve 12") and says so.
+  turns_per_day: 60
+  # Tool rounds the model may use in one turn before it must answer.
+  max_tool_rounds: 3
+  # One deep analysis (Sonnet through `claude -p`, read-only) is ended after this long.
+  analysis_timeout_minutes: 5
+  # Opening Reaper HQ after this many hours away (since Charlie's last HQ visit, Reaper turn or sit-rep) gives a
+  # "catch me up" briefing at once. (Charlie, 2026-11-04)
+  catch_up_after_hours: 2
+
+backups:
+  # Daily database backups kept (older ones are deleted)
+  keep_last: 30
+
+phone:
+  # Reaper only ever calls Charlie's own number (enforced in code, not configurable)
+  quiet_hours_start: "22:00"
+  quiet_hours_end: "08:00"
+  urgent_calls_per_day: 3

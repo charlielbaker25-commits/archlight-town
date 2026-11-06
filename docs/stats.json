@@ -1,0 +1,10 @@
+{
+  "tests_collected": 1190,
+  "test_modules_exported": 36,
+  "agents": 13,
+  "leads": 26,
+  "builds": 22,
+  "api_usd": 0.024318,
+  "api_usd_per_build": 0.001105,
+  "api_usd_per_lead": 0.000935
+}

@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "the-town"
+version = "0.1.0"
+description = "An AI-run website business with an approval gate on every outside action."
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic",      # Claude API calls for the small Haiku jobs
+    "typer",          # the `town` terminal commands
+    "rich",           # Reaper-style terminal output
+    "duckdb",         # downloading Overture Maps places data
+    "ruamel.yaml",    # reading and writing limits.yaml without losing comments
+    "python-dotenv",  # loading the API key from .env
+    "tzdata",         # time zone data (Windows has none built in), for Chicago times in `town log`
+    "playwright==1.63.0",  # the Inspector loads sites in a real browser (run `python -m playwright install chromium` once)
+    "google-auth==2.61.0",          # Gmail: the sign-in token and its refresh, and the authorized HTTP session
+    "google-auth-oauthlib==1.5.0",  # Gmail: Google's installed-app sign-in (`town gmail-connect`)
+    "fastapi==0.143.0",    # Reaper HQ: the local server behind the page (`town hq`, 127.0.0.1 only)
+    "starlette==1.7.0",    # FastAPI's web toolkit, pinned too (its test client tests the server in-process)
+    "uvicorn==0.54.0",     # runs the HQ server
+]
+
+[project.optional-dependencies]
+# For tests and tools only (`pip install -e ".[dev]"`): pytest, and Pillow, which the Critic's screenshot test
+# and tools/builder_v2_screens.py use to read and join screenshots. The Town itself never imports it.
+dev = ["pytest", "Pillow==13.0.0"]
+# Reaper's voice v2 (tools/voice_tune.py): Kokoro read locally, then a robot effect in plain numpy/scipy.
+# Optional: only for making and tuning voice samples (`pip install -e ".[voice]"`).
+voice = ["kokoro-onnx==0.6.1", "onnxruntime==1.31.0", "numpy==2.5.4", "scipy==1.18.1"]
+
+# `town` in any terminal (with the venv active) runs launcher.app
+[project.scripts]
+town = "launcher:app"
+
+[tool.setuptools]
+py-modules = ["launcher"]
+
+[tool.setuptools.packages.find]
+include = ["engine*", "packs*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Put the project folder on the import path, so `from tests...` works with plain
+# `pytest` too, not just `python -m pytest` (which adds the current folder itself).
+pythonpath = ["."]
+# `pytest -m "not hq_browser"` runs everything but the slow 3D page tests (tests/test_hq_page.py and
+# tests/test_hq_stress.py) in minutes on the laptop. Plain `pytest` still runs everything.
+markers = ["hq_browser: the 3D HQ page and stress tests in a real browser (slow on the laptop)"]

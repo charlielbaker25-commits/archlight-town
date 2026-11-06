@@ -1,0 +1,9 @@
+---
+// Required on every preview (the Town's facts check looks for this wording). Restyle it freely,
+// but keep the words: the site is a sample, and the owner confirms the details.
+interface Props { business: string }
+const { business } = Astro.props;
+---
+<p class="preview-note">
+  Preview made by Example Web Studio for {business}. Details to be confirmed by the owner.
+</p>

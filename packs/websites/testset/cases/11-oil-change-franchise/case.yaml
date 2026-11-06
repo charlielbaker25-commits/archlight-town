@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Made-up brand; not a real company; never contact.
+# A franchise location: it has no website of its own because it uses the corporate site,
+# so the listing shows no website at all.
+business_name: "QuickTurn Oil & Lube #214"  # quoted: an unquoted " #" starts a YAML comment
+business_type: automotive_oil_change
+area: Brentwood
+address: 2950 S Brentwood Blvd, Brentwood, MO 63144
+phone: 314-555-0111
+website: ""
+public_email: ""
+source: testset
+source_id: testset-11
+confidence: 0.89

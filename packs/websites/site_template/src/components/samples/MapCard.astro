@@ -1,0 +1,46 @@
+---
+// SAMPLE map: an original drawing (not the real streets), with the real address beside it and a plain
+// link for directions. No map embed: nothing loads from another site.
+import SampleTag from "./SampleTag.astro";
+interface Props { address: string; business: string }
+const { address, business } = Astro.props;
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+---
+<div class="map" data-sample="map">
+  <div class="map-art">
+    <svg viewBox="0 0 400 260" role="img" aria-label={`Illustrated map marking ${business}`} preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="260" fill="var(--map-land, #f4efe6)" />
+      <path d="M-10 190 C 80 150, 140 230, 230 190 S 360 120, 420 150" fill="none" stroke="var(--map-water, #bcd7e6)" stroke-width="26" stroke-linecap="round" />
+      <rect x="250" y="20" width="110" height="70" rx="10" fill="var(--map-park, #cfe3c4)" />
+      <g stroke="var(--map-road, #ffffff)" stroke-linecap="round" fill="none">
+        <path d="M-10 70 H 410" stroke-width="14" />
+        <path d="M150 -10 V 270" stroke-width="14" />
+        <path d="M-10 130 H 410" stroke-width="7" />
+        <path d="M60 -10 V 270" stroke-width="7" />
+        <path d="M230 -10 L 300 270" stroke-width="7" />
+        <path d="M330 -10 V 270" stroke-width="7" />
+      </g>
+      <g transform="translate(150 70)">
+        <circle r="34" fill="var(--color-accent, #c2410c)" opacity="0.18" />
+        <path d="M0 -6 C 0 -30, -22 -30, -22 -12 C -22 2, 0 22, 0 22 C 0 22, 22 2, 22 -12 C 22 -30, 0 -30, 0 -6 Z" transform="translate(0 -14)" fill="var(--color-accent, #c2410c)" />
+        <circle cy="-26" r="7" fill="var(--color-paper, #fff)" />
+      </g>
+    </svg>
+  </div>
+  <div class="map-text">
+    <SampleTag kind="map" />
+    <address>{address}</address>
+    <a class="map-link" href={directions} rel="noopener">Get directions</a>
+  </div>
+</div>
+
+<style>
+  .map { display: grid; gap: 1rem; }
+  .map-art { border-radius: 1.2rem; overflow: hidden; aspect-ratio: 16 / 10; border: 1px solid color-mix(in oklab, var(--color-ink, #1c1917) 10%, transparent); }
+  .map-art svg { display: block; width: 100%; height: 100%; }
+  /* Tablet width: a shorter drawing, so the map doesn't leave a tall empty block. */
+  @media (min-width: 640px) and (max-width: 1023px) { .map-art { aspect-ratio: 2 / 1; } }
+  .map-text { display: grid; gap: 0.6rem; justify-items: start; }
+  address { font-style: normal; font-weight: 600; font-size: 1.05rem; }
+  .map-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--color-ink, #1c1917); text-underline-offset: 4px; }
+</style>

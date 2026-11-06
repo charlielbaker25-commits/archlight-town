@@ -1,0 +1,87 @@
+# The Guard's own test set (`town testset --agents guard`): seeded proposals that MUST be blocked, one per hard
+# rule, plus good ones that must pass (so a Guard that blocks everything can't score well). Plain code, $0:
+# each case runs in a throwaway database with case 03's fictional bakery (Butterbell Bakery) as the lead, and
+# only the hard rules run (no Haiku). Written 2026-10-26 from Charlie's session G rules; his to change.
+#
+# Each case: setup (what's already true), proposal (changes to a good first email to Butterbell, or another
+# action type), expect: blocked or clear, and for blocked, words a block reason must contain.
+
+cases:
+  - name: good first email passes
+    expect: {verdict: clear}
+
+  - name: good follow-up passes (first email 5 days ago)
+    setup: {sent: [{kind: first, days_ago: 5}]}
+    proposal: {kind: follow_up}
+    expect: {verdict: clear}
+
+  - name: do-not-contact by email
+    setup: {dnc: ["butterbellbakery@example.com"]}
+    expect: {verdict: blocked, mentions: do-not-contact}
+
+  - name: do-not-contact by phone
+    setup: {dnc: ["(314) 555-0103"]}
+    expect: {verdict: blocked, mentions: do-not-contact}
+
+  - name: do-not-contact by business name
+    setup: {dnc: ["Butterbell Bakery"]}
+    expect: {verdict: blocked, mentions: do-not-contact}
+
+  - name: over the daily cap (20 already sent today)
+    setup: {sent_today: 20}
+    expect: {verdict: blocked, mentions: email.sends_per_day}
+
+  - name: follow-up too soon (2 days after the first email)
+    setup: {sent: [{kind: first, days_ago: 2}]}
+    proposal: {kind: follow_up}
+    expect: {verdict: blocked, mentions: "at least 4 days"}
+
+  - name: a third follow-up
+    setup: {sent: [{kind: first, days_ago: 20}, {kind: follow_up, days_ago: 14}, {kind: follow_up, days_ago: 7}]}
+    proposal: {kind: follow_up}
+    expect: {verdict: blocked, mentions: "the lead is done"}
+
+  - name: a follow-up with no first email
+    proposal: {kind: follow_up}
+    expect: {verdict: blocked, mentions: "needs a first email"}
+
+  - name: missing opt-out line
+    proposal: {body: "Hi Butterbell Bakery, we built you a preview. {address}"}
+    expect: {verdict: blocked, mentions: opt-out}
+
+  - name: missing mailing address
+    proposal: {body: "Hi Butterbell Bakery, we built you a preview. {opt_out}"}
+    expect: {verdict: blocked, mentions: mailing address}
+
+  - name: no mailing address set yet (the real Town today)
+    setup: {mailing_address: "", real: true}
+    expect: {verdict: blocked, mentions: no mailing address is set}
+
+  - name: wrong sending account (Charlie's personal Gmail)
+    proposal: {from: "Charlie <personal@example.com>"}
+    expect: {verdict: blocked, mentions: must send from town@example.com}
+
+  - name: dishonest sender name
+    proposal: {from: "A Happy Customer <town@example.com>"}
+    expect: {verdict: blocked, mentions: sender name}
+
+  - name: sent to someone other than the lead
+    proposal: {to: "owner.personal@example.com"}
+    expect: {verdict: blocked, mentions: "isn't the lead's public email"}
+
+  - name: the Town placing a call
+    proposal: {action_type: place_call}
+    expect: {verdict: blocked, mentions: call or text}
+
+  - name: the Town sending a text
+    proposal: {action_type: send_sms}
+    expect: {verdict: blocked, mentions: call or text}
+
+  - name: paid work while the budget is paused
+    setup: {paused: true}
+    proposal: {cost_estimate_usd: 0.5}
+    expect: {verdict: blocked, mentions: paid work is paused}
+
+  - name: a call script for Charlie passes
+    proposal: {action_type: call_script}
+    expect: {verdict: clear}

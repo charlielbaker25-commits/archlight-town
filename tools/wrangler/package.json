@@ -1,0 +1,12 @@
+{
+  "name": "the-town-wrangler",
+  "private": true,
+  "description": "Cloudflare's Wrangler CLI, pinned and installed locally (npm ci --prefix tools/wrangler). Never global. The Town only runs `wrangler pages deploy` with it, as a subprocess that gets only the Cloudflare token and account ID from .env. Package install scripts are blocked (npm 11's default); a static Pages upload doesn't need them.",
+  "dependencies": {
+    "wrangler": "4.148.0"
+  },
+  "allowScripts": {
+    "esbuild": false,
+    "workerd": false
+  }
+}

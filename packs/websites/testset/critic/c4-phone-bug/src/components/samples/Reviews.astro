@@ -1,0 +1,41 @@
+---
+// SAMPLE reviews: empty, labeled cards that show where real reviews will go. NEVER a fake review: no
+// quotes, no names, no stars or ratings (the facts check fails them even inside a sample section).
+import SampleTag from "./SampleTag.astro";
+interface Props { heading?: string }
+const { heading = "What people say" } = Astro.props;
+const CARDS = ["A real review from one of your customers", "Another customer, in their own words", "Your newest review, kept up to date"];
+---
+<section class="reviews" data-sample="reviews" id="reviews" aria-labelledby="reviews-title">
+  <div class="reviews-head reveal">
+    <h2 id="reviews-title">{heading}</h2>
+    <SampleTag kind="reviews" />
+  </div>
+  <ul class="reviews-grid" role="list">
+    {CARDS.map((line, i) => (
+      <li class="review-card reveal" style={`--delay:${i * 90}ms`}>
+        <svg class="quote" viewBox="0 0 48 36" width="40" height="30" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 5C14 7 11 12 11 18h9v18H0Zm27 0V22C27 9 34 2 46 0l2 5c-7 2-10 7-10 13h9v18H27Z" fill="currentColor"/></svg>
+        <p class="review-line">{line}</p>
+        <span class="review-bar" aria-hidden="true"></span>
+        <span class="review-bar short" aria-hidden="true"></span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .reviews-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 1.75rem; }
+  .reviews-head h2 { margin: 0;  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem); line-height: 1.1; }
+  .reviews-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  @media (min-width: 860px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+  .review-card {
+    color: var(--color-ink, #1c1917);
+    display: grid; gap: 0.8rem; padding: 1.4rem; border-radius: 1.1rem;
+    background: var(--color-paper, #fff);
+    border: 1px dashed color-mix(in oklab, var(--color-ink, #1c1917) 22%, transparent);
+  }
+  .quote { color: var(--color-accent, #c2410c); opacity: 0.85; }
+  .review-line { margin: 0; font-weight: 600; }
+  .review-bar { display: block; height: 0.55rem; border-radius: 999px; background: color-mix(in oklab, var(--color-ink, #1c1917) 9%, transparent); }
+  .review-bar.short { width: 60%; }
+</style>

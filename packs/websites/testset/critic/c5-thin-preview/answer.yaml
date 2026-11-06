@@ -1,0 +1,9 @@
+# DRAFT answer key, pending Charlie's approval (added 2026-11-02, Builder v2). The OLD c1: dev build #8 of case
+# 07, frozen 2026-10-21, that used to be the "must pass" site. Honest, clean, passes every plain-code check, but
+# thin: hero, services, hours and contact only, with no gallery, story, reviews, booking or map, the kind of
+# preview Charlie's review of real build #8 called "small and not very detailed, looks like something anyone could
+# put together". Under "would the owner want this?" (min 4) it must fail.
+verdict: fail
+flaw: thin preview the owner wouldn't want (few sections, no sample gallery, story, reviews, booking or map)
+reason_mentions: ["thin", "sparse", "bare", "minimal", "few sections", "not very detailed", "anyone could",
+                  "richness", "sample section", "gallery", "reviews", "owner want"]

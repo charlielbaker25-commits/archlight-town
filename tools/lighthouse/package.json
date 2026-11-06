@@ -1,0 +1,8 @@
+{
+  "name": "the-town-lighthouse",
+  "private": true,
+  "description": "Lighthouse for the Inspector, pinned and installed locally (npm install --prefix tools/lighthouse). Never global.",
+  "dependencies": {
+    "lighthouse": "13.5.0"
+  }
+}

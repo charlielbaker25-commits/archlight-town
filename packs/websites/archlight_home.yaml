@@ -1,0 +1,21 @@
+# A fictional homepage example, not the business's private positioning or policy.
+name: Example Web Studio
+type: web_design
+area: Example Town
+email: town@example.com
+phone: ""
+facts:
+  - Example Web Studio makes sample websites for fictional businesses.
+  - A person reviews every site before publication.
+  - Contact town@example.com.
+rules:
+  - No invented facts, testimonials, prices or clients.
+  - No forms or input fields.
+  - Never suggest a university endorses the business.
+privacy:
+  title: Example privacy page
+  updated: November 5, 2026
+  intro: This fictional showcase doesn't hold business records or live accounts.
+  sections:
+    - heading: Example only
+      paragraphs: ["This text is a placeholder, not a live business privacy policy."]

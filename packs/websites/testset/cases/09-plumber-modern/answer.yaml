@@ -1,0 +1,12 @@
+worth_pursuing: no
+scout: inspector_decides
+reject_reason: ""
+contact_route: email
+site_problems: []
+site_notes: >-
+  A good, current site - https, responsive with a viewport tag, light images with alt text,
+  tap-to-call, clear services and service area, "Copyright 2026". Nothing we could honestly
+  say needs fixing. Pitching them would waste their time and ours.
+good_draft:
+  - No draft. Not worth pursuing - their site is already good.
+  - (If Messenger drafts anything here, that's a failure.)

@@ -1,0 +1,25 @@
+worth_pursuing: yes
+scout: inspector_decides
+reject_reason: ""
+contact_route: email
+site_problems: [not_mobile_friendly, no_https, outdated]
+site_notes: >-
+  Old design - fixed-width layout, no viewport tag, 11px text, plain http, and the
+  appointment-request form posts patient details over http. "New patient special for 2014"
+  and "Updated March 2014". The insurance list names a plan that no longer exists.
+good_draft:
+  - Email from town@example.com, honest subject naming the practice.
+  - Lead with patient trust - browsers mark the appointment form "Not secure", which scares off new patients.
+  - Mention the stale 2014 special as a quick, specific sign the site needs care.
+  - Preview link - modern and phone-friendly, with call and request-an-appointment buttons that go to the practice's phone or its own patient system. No invented services, staff or prices.
+  - Archlight never builds patient intake forms (health information brings legal requirements we don't take on); forms stay with the practice's own patient system.
+  - Care plan matters here (keeping hours and insurance info current). Under ~120 words, opt-out and address.
+  - Includes the price clause (far less than a traditional web design firm usually charges); no dollar amounts.
+# Facts the business publishes on its own homepage that a good sample site keeps (Builder test).
+# Added 2026-10-21 with Charlie's OK (session E, fix (a)).
+published_facts:
+  - fact: office hours (Mon-Thu 8:00-5:00, Fri 8:00-1:00, Sat-Sun closed)
+    shows_times: ["8:00", "5:00", "1:00"]
+# The Critic's passed review summary of this case's preview (fictional), the only source for the email's one
+# personal design sentence (Charlie, 2026-11-04).
+design_summary: "Calm sky blue and white with rounded cards and soft wave dividers. The old site's hours are shown with a call-to-confirm note."

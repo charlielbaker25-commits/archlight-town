@@ -1,0 +1,18 @@
+worth_pursuing: yes
+scout: pick
+reject_reason: ""
+contact_route: email
+site_problems: [no_site]
+site_notes: >-
+  No website, but a public email. A bakery lives on photos, hours and custom orders
+  (cakes, holidays), and none of that is findable today.
+good_draft:
+  - Email from town@example.com with an honest subject that names them, e.g. "A website preview for Butterbell Bakery".
+  - Under ~120 words. Start with 'Hi there,', say kindly that we couldn't find a website for them, then the preview link, built just for them.
+  - One specific reason - customers can't see hours or place a custom-cake order online.
+  - Care plan in one line. Simple close ("Happy to walk you through it - just reply").
+  - Opt-out line and mailing address at the bottom. No invented reviews, menu items or prices.
+  - Includes the price clause (far less than a traditional web design firm usually charges); no dollar amounts.
+# The Critic's passed review summary of this case's preview (fictional), the only source for the email's one
+# personal design sentence (Charlie, 2026-11-04).
+design_summary: "Warm cream and cinnamon palette with arched photo frames and a hand-lettered heading. Every sample is tagged and the phone number is easy to tap."

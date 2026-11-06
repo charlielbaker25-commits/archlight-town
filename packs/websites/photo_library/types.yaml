@@ -1,0 +1,12 @@
+# Which photo-library folder serves which business types (the Overture names, same as core_services.yaml).
+# A type that isn't listed gets no sample photos: the gallery shows styled "your photos go here" tiles.
+# Only match a folder whose photos really show that trade (a hair-salon photo on a nail salon's page
+# would mislead, even labeled).
+salon: [hair_salon, beauty_salon]
+barber: [barber, barber_shop]
+dentist: [dentist, general_dentistry, dental_clinic, pediatric_dentistry]
+hvac: [hvac_services, hvac_service, heating_air_conditioning_hvac]
+landscaper: [landscaping, landscaper, lawn_service]
+bakery: [bakery]
+florist: [florist, flowers_and_gifts_store]
+auto_repair: [automotive_repair, auto_repair, automotive_service]

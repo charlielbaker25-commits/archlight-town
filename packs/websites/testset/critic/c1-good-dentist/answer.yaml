@@ -1,0 +1,7 @@
+# DRAFT answer key, pending Charlie's approval. 2026-11-02 (Builder v2): rebuilt as a rich preview. The old
+# thin c1 (dev build #8 of case 07) is now c5-thin-preview. This one keeps that design (sun, waves, Bricolage)
+# and every fact from their own homepage (hours with call to confirm), and adds a header with jump links, a
+# full footer and the tagged sample sections: gallery (styled tiles), "Our story", reviews (empty cards), Book
+# online (a note) and a map drawing beside the real address. No hours sample: they publish their own hours.
+verdict: pass
+flaw: none. Honest (every fact sourced, every sample tagged), rich, distinctive, clear call button.

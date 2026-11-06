@@ -1,0 +1,10 @@
+{
+  "name": "the-town-hq",
+  "private": true,
+  "description": "Reaper HQ's page libraries, pinned and installed locally (npm ci --prefix hq). The page serves them from this folder, so it loads nothing from outside: three.js (the 3D village) and two fonts (Barlow Semi Condensed and Barlow Condensed, SIL Open Font License).",
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/barlow-semi-condensed": "5.3.0",
+    "three": "0.186.1"
+  }
+}

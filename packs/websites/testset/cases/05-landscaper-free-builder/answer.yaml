@@ -1,0 +1,19 @@
+worth_pursuing: yes
+scout: pick
+reject_reason: ""
+contact_route: email
+site_problems: [social_or_builder_only]
+site_notes: >-
+  A free-builder page on the builder's own address, with the builder's ad banner. Template
+  text was never replaced ("Add a paragraph here..."), the gallery is empty, and the
+  services list is still the template's. It looks unfinished.
+good_draft:
+  - Email from town@example.com, honest subject naming them.
+  - Gently name the problem - the current page still has placeholder text and an empty gallery.
+  - After 'Hi there,' and the problem said kindly, the preview link, built with their real services and area (Webster Groves).
+  - Their own web address instead of the builder's. Care plan in one line.
+  - Under ~120 words, opt-out line and mailing address at the bottom.
+  - Includes the price clause (far less than a traditional web design firm usually charges); no dollar amounts.
+# The Critic's passed review summary of this case's preview (fictional), the only source for the email's one
+# personal design sentence (Charlie, 2026-11-04).
+design_summary: "Deep moss green and stone gray with leaf-pattern dividers and a bold hero photo. Every sample is tagged; nothing is invented."

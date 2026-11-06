@@ -1,0 +1,31 @@
+# Captive networks: agents and offices whose website is controlled by the corporate office,
+# so they can't buy a site from us. Scout skips any lead whose name or Overture brand contains
+# one of these as whole words (ignoring case), in plain code, and logs it as skipped.
+# Independent agencies stay in. Real estate brokerages are deliberately NOT here: their agents
+# often buy their own sites (Charlie, 2026-10-20).
+# This is a list of facts about the market, not a limit, so it lives here and not in limits.yaml.
+# Use the network's full name when a short one is a common word ("Farmers Insurance", not "Farmers",
+# so a farmers market isn't skipped).
+
+networks:
+  # Insurance
+  - State Farm
+  - Allstate
+  - Farmers Insurance
+  - American Family Insurance
+  - AmFam
+  - Country Financial
+  - Shelter Insurance
+  # Financial advice and life insurance
+  - Edward Jones
+  - Northwestern Mutual
+  - New York Life
+  - Ameriprise
+  - Primerica
+  - Mutual of Omaha
+  - Thrivent
+  - Modern Woodmen
+  # Tax preparation franchises
+  - H&R Block
+  - Jackson Hewitt
+  - Liberty Tax

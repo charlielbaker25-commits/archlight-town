@@ -1,0 +1,12 @@
+worth_pursuing: no
+scout: reject
+reject_reason: >-
+  Not a real local business - a lead-generation listing with an out-of-area (646, New York)
+  phone number, no street address and a generic "STL ... 24/7" name. There's no owner here to sell to.
+contact_route: none
+site_problems: not_inspected
+site_notes: >-
+  Not inspected. Rejected leads never reach the Inspector. It has no website, which makes it
+  look like a great prospect on paper; the phone number and the missing street address are the giveaways.
+good_draft:
+  - No draft. Reject the lead.

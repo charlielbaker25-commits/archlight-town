@@ -1,0 +1,11 @@
+# FICTIONAL business for the test set. Not a real HVAC company; never contact.
+business_name: Tuckpoint Heating & Cooling
+business_type: hvac_services
+area: Affton
+address: 9120 Gravois Rd, Affton, MO 63123
+phone: 314-555-0102
+website: ""
+public_email: ""
+source: testset
+source_id: testset-02
+confidence: 0.91

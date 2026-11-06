@@ -1,0 +1,39 @@
+---
+// SAMPLE "Book online": a real button that opens a short note (the browser's own popover; no script,
+// no form). The finished site links the booking app the business already uses (or a free one Example Web Studio sets
+// up with them; Charlie, 2026-11-04). Until then the note points to the phone.
+import SampleTag from "./SampleTag.astro";
+interface Props { id?: string; phoneDisplay: string; phoneTel: string; label?: string; class?: string }
+const { id = "booking-note", phoneDisplay, phoneTel, label = "Book online", class: extra = "" } = Astro.props;
+---
+<span class="book" data-sample="booking">
+  <button type="button" class:list={["book-button", extra]} popovertarget={id}>{label}</button>
+  <div id={id} popover class="book-note" role="dialog" aria-labelledby={`${id}-title`}>
+    <SampleTag kind="booking" />
+    <p id={`${id}-title`} class="book-title">Online booking comes with your finished site.</p>
+    <p>Your finished site links the booking app you already use, or a free one we set up with you. Customers pick a time from their phone.</p>
+    {phoneDisplay && <p>For now, please call <a href={phoneTel} class="whitespace-nowrap">{phoneDisplay}</a>.</p>}
+    <button type="button" class="book-close" popovertarget={id} popovertargetaction="hide">Close</button>
+  </div>
+</span>
+
+<style>
+  .book { display: contents; }
+  .book-note {
+    max-width: min(26rem, calc(100vw - 2rem));
+    padding: 1.5rem;
+    border: 0;
+    border-radius: 1.2rem;
+    color: var(--color-ink, #1c1917);
+    background: var(--color-paper, #fff);
+    box-shadow: 0 24px 60px -20px rgb(0 0 0 / 0.45);
+  }
+  .book-note::backdrop { background: rgb(0 0 0 / 0.35); }
+  .book-note p { margin: 0.75rem 0 0; }
+  .book-title { font-weight: 700; font-size: 1.15rem; }
+  .book-note a { color: inherit; font-weight: 700; }
+  .book-close {
+    margin-top: 1.25rem; min-height: 44px; padding: 0 1.2rem; border-radius: 999px; border: 1px solid currentColor;
+    background: transparent; color: inherit; font: inherit; font-weight: 600; cursor: pointer;
+  }
+</style>

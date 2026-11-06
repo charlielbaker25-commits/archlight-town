@@ -1,0 +1,18 @@
+worth_pursuing: yes
+scout: pick
+reject_reason: ""
+contact_route: held   # no public email: saved as "held (no email)", never contacted (email-first, 2026-11-03)
+# The Messenger test set still drafts a call script for this case, as if the owner had replied asking for a call.
+call_script_when_asked: yes
+site_problems: [no_site]
+site_notes: >-
+  No website. HVAC customers search in a hurry ("furnace repair near me") and call whoever
+  looks real. With no site, they lose those calls to companies that have one.
+good_draft:
+  - Call script for Charlie (no public email).
+  - Open with why he's calling (a free preview of a new website for them), then the emergency search - when a furnace dies, people look for a company with a site and a big phone number.
+  - The preview shows their services, service area (Affton and nearby) and a tap-to-call button.
+  - Don't promise rankings or more calls; say it makes them easier to find and trust.
+  - Care plan in one line. Ask if they'd like the preview link texted or emailed.
+  - Offer the preview with "I can text or email you the link"; the link is never in what Charlie says (the Town shows it to him separately).
+  - Objection 2 is "What does it cost?", answered in order: sites start at $10; "We recommend Standard at $20" (up to 5 pages, gallery, booking link, Google Business Profile setup, first 3 months of care free); Premium is $30; the care plan is $4/month; no-upfront option $5/month for 2 months. The care plan line says $4/month. No other dollar amounts (Charlie, 2026-11-02), and never "most people/salons/customers" or "most popular" (nobody has bought yet; 2026-11-03).

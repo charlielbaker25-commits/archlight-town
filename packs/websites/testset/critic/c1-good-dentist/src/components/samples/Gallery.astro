@@ -1,0 +1,69 @@
+---
+// SAMPLE gallery. With licensed library photos (src/assets/sample-photos/, listed in brief.json's
+// sample_photos) each one is labeled "Sample photo" inside a data-sample-photo element; without them it
+// shows styled tiles. Never a photo that isn't from the library or the business's own site.
+import { Image } from "astro:assets";
+import SampleTag from "./SampleTag.astro";
+interface Props { photos?: { src: any; alt: string }[]; heading?: string; tiles?: string[] }
+const { photos = [], heading = "A look inside", tiles = ["The space", "Your work", "Details", "Your team at work", "Before and after", "Your favorite corner"] } = Astro.props;
+---
+<section class="gallery" data-sample="gallery" id="gallery" aria-labelledby="gallery-title">
+  <div class="gallery-head reveal">
+    <h2 id="gallery-title">{heading}</h2>
+    <SampleTag kind="gallery" />
+  </div>
+  {photos.length > 0 ? (
+    <ul class="gallery-grid" role="list">
+      {photos.map((photo, i) => (
+        <li class:list={["reveal", `tile-${i % 6}`]}>
+          <figure data-sample-photo>
+            <Image src={photo.src} alt={photo.alt} widths={[360, 640, 960]} sizes="(min-width: 960px) 30vw, (min-width: 640px) 45vw, 90vw" loading="lazy" />
+            <figcaption>Sample photo</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <ul class="gallery-grid" role="list">
+      {tiles.map((label, i) => (
+        <li class:list={["reveal", "placeholder", `tile-${i % 6}`]}>
+          <span class="placeholder-label">{label}</span>
+          <span class="placeholder-note">Your photo</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<style>
+  .gallery-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 1.75rem; }
+  .gallery-head h2 { margin: 0;  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem); line-height: 1.1; }
+  .gallery-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; grid-template-columns: 1fr 1fr; }
+  @media (min-width: 900px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 1.1rem; } }
+  figure { margin: 0; }
+  figure :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; }
+  figcaption { margin-top: 0.4rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--color-muted, #57534e); }
+  .placeholder {
+    aspect-ratio: 4 / 5;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.15rem;
+    color: var(--color-ink, #1c1917);
+    background:
+      radial-gradient(120% 80% at 0% 0%, var(--tile-a) 0%, transparent 60%),
+      radial-gradient(120% 90% at 100% 100%, var(--tile-b) 0%, transparent 65%),
+      var(--color-paper-2, #f5f5f4);
+    border: 1px solid color-mix(in oklab, var(--color-ink, #1c1917) 10%, transparent);
+  }
+  .tile-0 { --tile-a: var(--color-accent-soft, #fed7aa); --tile-b: var(--color-accent-2-soft, #fbcfe8); }
+  .tile-1 { --tile-a: var(--color-accent-2-soft, #fbcfe8); --tile-b: var(--color-accent-3-soft, #e9d5ff); }
+  .tile-2 { --tile-a: var(--color-accent-3-soft, #e9d5ff); --tile-b: var(--color-accent-soft, #fed7aa); }
+  .tile-3 { --tile-a: var(--color-accent-soft, #fed7aa); --tile-b: var(--color-accent-3-soft, #e9d5ff); }
+  .tile-4 { --tile-a: var(--color-accent-2-soft, #fbcfe8); --tile-b: var(--color-accent-soft, #fed7aa); }
+  .tile-5 { --tile-a: var(--color-accent-3-soft, #e9d5ff); --tile-b: var(--color-accent-2-soft, #fbcfe8); }
+  .placeholder-label { font-weight: 700; font-size: 1rem; line-height: 1.2; }
+  .placeholder-note { font-size: 0.8rem; color: var(--color-muted, #57534e); }
+</style>

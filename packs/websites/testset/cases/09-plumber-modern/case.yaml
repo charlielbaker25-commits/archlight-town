@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real plumber; never contact.
+# The URL is a reserved example domain and is never fetched. Agents read site/.
+business_name: Clearline Plumbing Co.
+business_type: plumbing
+area: Brentwood
+address: 8820 Manchester Rd, Brentwood, MO 63144
+phone: 314-555-0109
+website: https://www.clearlineplumbing.example.com
+public_email: clearlineplumbing@example.com
+source: testset
+source_id: testset-09
+confidence: 0.96
+fixture: site/index.html

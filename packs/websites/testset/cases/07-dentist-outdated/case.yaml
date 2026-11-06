@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real dental office; never contact.
+# The URL is a reserved example domain and is never fetched. Agents read site/.
+business_name: Brightwater Family Dentistry
+business_type: dentist
+area: Florissant
+address: 1450 N New Florissant Rd, Florissant, MO 63033
+phone: 314-555-0107
+website: http://www.brightwaterdental.example.com
+public_email: brightwaterdental@example.com
+source: testset
+source_id: testset-07
+confidence: 0.95
+fixture: site/index.html

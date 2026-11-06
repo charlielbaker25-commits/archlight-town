@@ -1,0 +1,8 @@
+{
+  "name": "the-town-axe",
+  "private": true,
+  "description": "axe-core for the Critic's accessibility check, pinned and installed locally (npm ci --prefix tools/axe). Never global. Only axe.min.js is used: Playwright injects it into the page from this file, so nothing is fetched while checking a site.",
+  "dependencies": {
+    "axe-core": "4.14.0"
+  }
+}

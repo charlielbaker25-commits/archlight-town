@@ -1,0 +1,7 @@
+# DRAFT answer key, pending Charlie's approval. Same site as c1 (rebuilt 2026-11-02 for Builder v2) plus ONE
+# invented line in the hero: "Same-day emergency visits available." Their homepage never says it, it isn't in a
+# tagged sample section, and the plain-code facts check doesn't catch it (no banned phrase, no time of day).
+verdict: fail
+flaw: invents "Same-day emergency visits available." (not in the listing or on their homepage)
+# The Critic's reasons must name the flaw: any of these words (ignoring case) counts.
+reason_mentions: ["same-day", "same day", "emergency"]

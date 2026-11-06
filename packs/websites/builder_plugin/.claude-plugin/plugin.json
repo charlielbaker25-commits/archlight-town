@@ -1,0 +1,5 @@
+{
+  "name": "archlight-builder",
+  "version": "1.0.0",
+  "description": "Skills the Town's Builder loads with --plugin-dir: Anthropic's official frontend-design skill (anthropics/skills @ 41bbe19d1a, Apache 2.0)."
+}

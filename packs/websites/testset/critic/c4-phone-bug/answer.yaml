@@ -1,0 +1,6 @@
+# DRAFT answer key, pending Charlie's approval. Same site as c1 (rebuilt 2026-11-02 for Builder v2) plus one CSS
+# rule that only applies below 480px: the hero's "Call" button jumps up and covers the last line of the headline.
+# Nothing scrolls sideways and axe-core finds nothing, so only the phone screenshot shows it.
+verdict: fail
+flaw: on a phone, the hero call button covers the headline ("whole family.")
+reason_mentions: ["overlap", "covers", "covering", "on top of", "obscur", "collid", "sits over", "hides"]

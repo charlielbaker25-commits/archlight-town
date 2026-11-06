@@ -1,0 +1,7 @@
+# DRAFT answer key, pending Charlie's approval (2026-10-21). Hand-written for fictional Tuckpoint
+# Heating & Cooling (case 02, no site): honest content, passes every code check, but the stock
+# "AI template" look: centered purple gradient hero, "Your Comfort, Our Priority", default sans-serif,
+# rows of identical emoji cards, "Get Started Today", "Why Choose Us?".
+verdict: fail
+flaw: generic AI-template design with nothing specific to this business
+reason_mentions: ["generic", "template", "cookie-cutter", "boilerplate", "interchangeable", "stock", "could be any"]

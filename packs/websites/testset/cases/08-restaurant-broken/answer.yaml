@@ -1,0 +1,19 @@
+worth_pursuing: yes
+scout: inspector_decides
+reject_reason: ""
+contact_route: email
+site_problems: [slow, broken_links]
+site_notes: >-
+  Modern-ish and on https, but broken. The Menu and Reservations links go to pages that
+  don't exist, three dish photos are missing, and the hero image is a ~1.2 MB uncompressed
+  file, so the page is slow on a phone. A restaurant whose menu link is broken loses diners.
+good_draft:
+  - Email from town@example.com, honest subject naming the restaurant.
+  - Lead with the concrete fix - "Your Menu and Reservations links lead to an error page."
+  - Mention the slow load and missing photos in one line.
+  - Preview link - fast, working menu page, tap-to-call for reservations. Use only dishes they actually list; never invent menu items or prices.
+  - Care plan fits well here (we'd catch broken links before customers do). Under ~120 words, opt-out and address.
+  - Includes the price clause (far less than a traditional web design firm usually charges); no dollar amounts.
+# The Critic's passed review summary of this case's preview (fictional), the only source for the email's one
+# personal design sentence (Charlie, 2026-11-04).
+design_summary: "Tomato red and olive with a checkered border and a menu-board style heading. Links all work and every sample is tagged."

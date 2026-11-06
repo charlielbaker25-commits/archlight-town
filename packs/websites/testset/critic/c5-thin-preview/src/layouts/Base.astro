@@ -1,0 +1,25 @@
+---
+// Keep everything in <head> below (noindex, viewport, lang). Add fonts and styles as you like.
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/figtree";
+import "../styles/global.css";
+import PreviewNote from "../components/PreviewNote.astro";
+
+interface Props { title: string; description: string; business: string }
+const { title, description, business } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <PreviewNote business={business} />
+  </body>
+</html>

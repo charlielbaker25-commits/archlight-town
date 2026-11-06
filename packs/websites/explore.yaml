@@ -1,0 +1,7 @@
+# Fictional demonstration configuration, not private market choices.
+types:
+  bakery: [bakery]
+  salon: [hair_salon, beauty_salon]
+  barber: [barber, barber_shop]
+# Places used by the fictional test cases; not a list of real prospects.
+areas: [Example Town, Kirkwood, Clayton]

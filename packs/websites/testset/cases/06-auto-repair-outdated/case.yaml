@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real repair shop; never contact.
+# The URL is a reserved example domain and is never fetched. Agents read site/.
+business_name: Oakhollow Auto Repair
+business_type: automotive_repair
+area: St. Louis
+address: 4211 Chippewa St, St. Louis, MO 63116
+phone: 314-555-0106
+website: http://www.oakhollowauto.example.com
+public_email: ""
+source: testset
+source_id: testset-06
+confidence: 0.92
+fixture: site/index.html

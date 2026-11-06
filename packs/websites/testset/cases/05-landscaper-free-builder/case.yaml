@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real landscaper; never contact.
+# The URL is never fetched. Agents read the frozen copy in site/.
+business_name: Fernbrook Lawn & Landscape
+business_type: landscaping
+area: Webster Groves
+address: 412 N Gore Ave, Webster Groves, MO 63119
+phone: 314-555-0105
+website: https://fictionaltestsetfernbrook.wixsite.com/home
+public_email: fernbrooklawn@example.com
+source: testset
+source_id: testset-05
+confidence: 0.88
+fixture: site/index.html

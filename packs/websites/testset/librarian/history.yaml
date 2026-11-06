@@ -1,0 +1,37 @@
+# The Librarian test set's frozen history (fictional businesses only; written 2026-11-02 for Phase 4).
+# Fifteen decisions "Charlie" made in October 2026. Loaded into a throwaway Town (never the instance's database)
+# exactly as listed: id, agent, action type, what it was for, how he decided, his reason or his edit.
+# Three real patterns are in here (see answers.yaml) and one lone rejection that is NOT a pattern.
+actions:
+  # The Builder's previews (publish_preview): three rejected for looking thin, one approved.
+  - {id: 1, agent: builder, type: publish_preview, target: "Shear Bliss (preview)", status: rejected,
+     reason: "Looks thin: only a hero and a services list. Anyone could put this together."}
+  - {id: 2, agent: builder, type: publish_preview, target: "Oak Lane Florist (preview)", status: rejected,
+     reason: "Too plain and short. It needs a gallery and a reviews section to feel like a real site."}
+  - {id: 3, agent: builder, type: publish_preview, target: "Tuckpoint Heating (preview)", status: rejected,
+     reason: "Thin again, not enough sections to impress an owner."}
+  - {id: 4, agent: builder, type: publish_preview, target: "Brightwater Dentistry (preview)", status: executed}
+  # The Messenger's emails (send_email): three edited the same way (the neighborhood added to the subject).
+  - {id: 5, agent: messenger, type: send_email, target: "Butterbell Bakery", status: executed,
+     original: {subject: "A free website preview for Butterbell Bakery"},
+     edited: {subject: "A free website preview for Butterbell Bakery in Kirkwood"}}
+  - {id: 6, agent: messenger, type: send_email, target: "Petal & Stem", status: executed,
+     original: {subject: "A free website preview for Petal & Stem"},
+     edited: {subject: "A free website preview for Petal & Stem in Maplewood"}}
+  - {id: 7, agent: messenger, type: send_email, target: "Clayton Cuts", status: executed,
+     original: {subject: "A free website preview for Clayton Cuts"},
+     edited: {subject: "A free website preview for Clayton Cuts in Clayton"}}
+  - {id: 8, agent: messenger, type: send_email, target: "Rosebud Bakery", status: executed}
+  # Scout's leads (add_lead): every franchise or chain location rejected; ordinary local shops approved.
+  - {id: 9, agent: scout, type: add_lead, target: "QuickLube #4412 (Affton)", status: rejected,
+     reason: "Chain location. Corporate runs its website."}
+  - {id: 10, agent: scout, type: add_lead, target: "Great Clips (Brentwood)", status: rejected,
+     reason: "Franchise, skip it."}
+  - {id: 11, agent: scout, type: add_lead, target: "Supercuts (Kirkwood)", status: rejected,
+     reason: "Another chain store. Never pitch franchises."}
+  - {id: 12, agent: scout, type: add_lead, target: "Marigold & Shears (Maplewood)", status: executed}
+  - {id: 13, agent: scout, type: add_lead, target: "Tuckpoint Heating & Cooling (Affton)", status: executed}
+  - {id: 14, agent: scout, type: add_lead, target: "Butterbell Bakery (Kirkwood)", status: executed}
+  # One lone rejection: not a pattern, so no lesson may come from it.
+  - {id: 15, agent: messenger, type: call_script, target: "Fictional Pediatric Dentistry", status: rejected,
+     reason: "Wrong phone number on this one."}

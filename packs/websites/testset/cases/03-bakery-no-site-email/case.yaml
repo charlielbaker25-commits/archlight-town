@@ -1,0 +1,11 @@
+# FICTIONAL business for the test set. Not a real bakery; never contact.
+business_name: Butterbell Bakery
+business_type: bakery
+area: Kirkwood
+address: 118 W Argonne Dr, Kirkwood, MO 63122
+phone: 314-555-0103
+website: ""
+public_email: butterbellbakery@example.com
+source: testset
+source_id: testset-03
+confidence: 0.93

@@ -1,0 +1,11 @@
+# FICTIONAL business for the test set. Not a real salon; never contact.
+business_name: Marigold & Shears Hair Studio
+business_type: hair_salon
+area: Maplewood
+address: 7340 Manchester Rd, Maplewood, MO 63143
+phone: 314-555-0101
+website: ""
+public_email: ""
+source: testset
+source_id: testset-01
+confidence: 0.94

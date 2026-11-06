@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real restaurant; never contact.
+# The URL is a reserved example domain and is never fetched. Agents read site/.
+business_name: Casa Tovarelli Trattoria
+business_type: italian_restaurant
+area: St. Louis
+address: 5320 Daggett Ave, St. Louis, MO 63110
+phone: 314-555-0108
+website: https://www.casatovarelli.example.com
+public_email: casatovarelli@example.com
+source: testset
+source_id: testset-08
+confidence: 0.93
+fixture: site/index.html

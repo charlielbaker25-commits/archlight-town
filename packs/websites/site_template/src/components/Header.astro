@@ -1,0 +1,40 @@
+---
+// The site header: the business name, a few jump links and the call button. It stays at the top
+// while the visitor scrolls (sticky). On a phone the links hide and the call button stays.
+interface Props { business: string; phoneDisplay: string; phoneTel: string; links?: { href: string; label: string }[] }
+const { business, phoneDisplay, phoneTel, links = [] } = Astro.props;
+---
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="#top" class="brand">{business}</a>
+    {links.length > 0 && (
+      <nav aria-label="Sections">
+        <ul role="list">
+          {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+    )}
+    {phoneDisplay && <a href={phoneTel} class="header-call whitespace-nowrap" aria-label={`Call ${business} at ${phoneDisplay}`}>Call<span class="header-number">&nbsp;{phoneDisplay}</span></a>}
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in oklab, var(--color-paper, #fff) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-ink, #1c1917) 8%, transparent);
+  }
+  .header-row { display: flex; align-items: center; gap: 1rem; min-height: 4rem; }
+  .brand { font-family: var(--font-display, inherit); font-weight: 700; font-size: 1.15rem; color: var(--color-ink, #1c1917); text-decoration: none; margin-right: auto; line-height: 1.15; }
+  nav { display: none; }
+  nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+  nav a { color: var(--color-ink, #1c1917); text-decoration: none; font-weight: 500; font-size: 0.95rem; display: inline-flex; align-items: center; min-height: 44px; }
+  nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
+  .header-call {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: 999px;
+    background: var(--color-ink, #1c1917); color: var(--color-paper, #fff); font-weight: 700; text-decoration: none; flex: none;
+  }
+  .header-number { display: none; }
+  @media (min-width: 900px) { nav { display: block; } .header-number { display: inline; } }
+</style>

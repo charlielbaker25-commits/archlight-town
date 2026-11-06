@@ -1,0 +1,14 @@
+# PUBLIC PLACEHOLDERS ONLY. Small numeric stand-ins keep fictional tests runnable.
+# These are not real prices or offers. No production use.
+preview_clause: >-
+  a quick preview built from your public listing; your finished site adds your own photos, online booking,
+  hours and reviews, and we keep it updated every month
+booking: >-
+  Online booking links the booking app the business already uses, or a free Square Appointments page we set up with them;
+  no booking system of our own and no client booking data held by us.
+tiers:
+  - {name: Basic, price_usd: 10, includes: "[EXAMPLE SCOPE]"}
+  - {name: Standard, price_usd: 20, recommended: true, includes: "[EXAMPLE SCOPE]"}
+  - {name: Premium, price_usd: 30, includes: "[EXAMPLE SCOPE]"}
+care_plan: {monthly_usd: 4, includes: "[EXAMPLE CARE SCOPE]"}
+no_upfront: {tier: Standard, monthly_usd: 5, months: 2}

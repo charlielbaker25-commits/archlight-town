@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #12324a;
+  --color-rinse: #f3f8f7;
+  --color-foam: #d7ecea;
+  --color-tide: #1e6f76;
+  --color-lagoon: #2e8c93;
+  --color-sun: #f6c64a;
+
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-rinse);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--color-sun);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 50;
+  background: var(--color-sun);
+  color: var(--color-ink);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Pill buttons (in the components layer so utilities can adjust them) */
+@layer components {
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.btn-sun {
+  background: var(--color-sun);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  box-shadow: 0 3px 0 var(--color-ink);
+}
+
+.btn-sun:hover {
+  background: #ffd667;
+}
+
+.btn-line {
+  border: 2px solid currentColor;
+}
+
+.btn-line:hover {
+  background: rgb(18 50 74 / 0.07);
+}
+}
+
+/* The rolling water at the foot of the hero */
+.wave-track {
+  display: flex;
+  width: 200%;
+  animation: drift 18s linear infinite;
+}
+
+.wave-track.slow {
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+
+.wave-track svg {
+  flex: 0 0 50%;
+  display: block;
+  height: 100%;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sun {
+  animation: rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(40%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Hours list */
+.hours div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 2px dotted rgb(18 50 74 / 0.3);
+}
+
+.hours dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.preview-note {
+  margin: 0;
+  padding: 1rem 1.25rem 1.5rem;
+  background: var(--color-sun);
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Added 2026-10-26: at tablet width the sun sat behind the headline (any graphic overlapping text is a must-fix). */
+@media (min-width: 640px) and (max-width: 1023px) { .sun { width: 18rem; } }

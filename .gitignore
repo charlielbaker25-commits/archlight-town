@@ -1,0 +1,17 @@
+.env*
+secrets/
+data/
+dev/
+backups/
+state/
+work/
+instance.yaml
+instance.dev.yaml
+*.db*
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+node_modules/
+.wrangler/

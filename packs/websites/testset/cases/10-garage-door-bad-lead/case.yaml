@@ -1,0 +1,13 @@
+# FICTIONAL business for the test set. Not a real company; never contact.
+# A lead-generation listing: a St. Louis-sounding name, no street address, and an
+# out-of-area (New York) phone number that forwards to a national call center.
+business_name: STL Garage Door Repair 24/7
+business_type: garage_door_service
+area: St. Louis
+address: Serving St. Louis, MO
+phone: 646-555-0110
+website: ""
+public_email: ""
+source: testset
+source_id: testset-10
+confidence: 0.77

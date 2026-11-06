@@ -1,0 +1,18 @@
+worth_pursuing: yes
+scout: pick
+reject_reason: ""
+contact_route: held   # no public email: saved as "held (no email)", never contacted (email-first, 2026-11-03)
+# The Messenger test set still drafts a call script for this case, as if the owner had replied asking for a call.
+call_script_when_asked: yes
+site_problems: [no_site]
+site_notes: >-
+  No website at all. People searching "hair salon Maplewood" find a map pin with a phone
+  number and nothing else: no services, prices, photos or booking.
+good_draft:
+  - Call script for Charlie (no public email), short and friendly, local ("I'm in St. Louis").
+  - Open with why he's calling (we built a free preview of a new website for them), then the gap, kindly - when people search for a salon in Maplewood, there's no website to find.
+  - Offer the free preview made for them - their name, their services, a call-to-book button.
+  - Mention the care plan in one line (we host it, keep it updated, small edits each month).
+  - Ask for a yes to text or email them the preview link. No pressure, no invented claims.
+  - Offer the preview with "I can text or email you the link"; the link is never in what Charlie says (the Town shows it to him separately).
+  - Objection 2 is "What does it cost?", answered in order: sites start at $10; "We recommend Standard at $20" (up to 5 pages, gallery, booking link, Google Business Profile setup, first 3 months of care free); Premium is $30; the care plan is $4/month; no-upfront option $5/month for 2 months. The care plan line says $4/month. No other dollar amounts (Charlie, 2026-11-02), and never "most people/salons/customers" or "most popular" (nobody has bought yet; 2026-11-03).

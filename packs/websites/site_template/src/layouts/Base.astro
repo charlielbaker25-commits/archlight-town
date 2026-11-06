@@ -1,0 +1,38 @@
+---
+// Keep everything in <head> below (noindex, viewport, lang). Add fonts and styles as you like.
+import "../styles/global.css";
+import PreviewNote from "../components/PreviewNote.astro";
+
+interface Props { title: string; description: string; business: string }
+const { title, description, business } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Scroll animations: sections marked class="reveal" fade up once as they come into view. Only when the
+         visitor's device allows motion, and only with JavaScript on; otherwise everything simply shows. -->
+    <script is:inline>
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+        document.documentElement.classList.add("reveal-on");
+        addEventListener("DOMContentLoaded", () => {
+          const seen = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) { entry.target.classList.add("in"); seen.unobserve(entry.target); }
+            }
+          }, { rootMargin: "0px 0px -6% 0px" });
+          document.querySelectorAll(".reveal").forEach((el) => seen.observe(el));
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <PreviewNote business={business} />
+  </body>
+</html>

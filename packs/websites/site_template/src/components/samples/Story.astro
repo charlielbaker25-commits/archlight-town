@@ -1,0 +1,21 @@
+---
+// SAMPLE "Our story". Never an invented story: it says the owner's own story goes here.
+import SampleTag from "./SampleTag.astro";
+interface Props { business: string; heading?: string }
+const { business, heading = "Our story" } = Astro.props;
+---
+<section class="story" data-sample="story" id="story" aria-labelledby="story-title">
+  <div class="story-inner reveal">
+    <SampleTag kind="story" />
+    <h2 id="story-title">{heading}</h2>
+    <p class="story-lead">This is where {business}'s own story goes, in the owner's words.</p>
+    <p>How it started, what you care about, and what a first visit is like. We write it with you, and you approve every word before it goes live.</p>
+  </div>
+</section>
+
+<style>
+  .story-inner { max-width: 42rem; display: grid; gap: 1rem; justify-items: start; }
+  .story-inner h2 { margin: 0.25rem 0 0;  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem); line-height: 1.1; }
+  .story-inner p { margin: 0; }
+  .story-lead { font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem); line-height: 1.35; font-family: var(--font-display, inherit); }
+</style>

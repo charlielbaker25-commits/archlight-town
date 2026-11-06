@@ -1,0 +1,42 @@
+---
+// The small tag every sample section carries (Charlie, 2026-11-02). The words are fixed: the Town's facts
+// check (packs/websites/samples.py) looks for them word for word inside data-sample-tag. Restyle freely,
+// but keep the words, keep it visible, and keep the data-sample-tag attribute.
+const TAGS = {
+  gallery: "Sample: your photos go here",
+  story: "Sample: your story goes here",
+  hours: "Sample: your hours",
+  reviews: "Sample: your reviews appear here",
+  booking: "Sample: online booking comes with your site",
+  map: "Sample: map illustration",
+} as const;
+interface Props { kind: keyof typeof TAGS; class?: string }
+const { kind, class: extra = "" } = Astro.props;
+---
+<p class:list={["sample-tag", extra]} data-sample-tag>{TAGS[kind]}</p>
+
+<style>
+  .sample-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 0.3em 0.8em;
+    border: 1px dashed currentColor;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    color: var(--color-ink, #1c1917);
+    background: var(--color-paper, #fff);
+  }
+  .sample-tag::before {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--color-accent, #c2410c);
+    flex: none;
+  }
+</style>

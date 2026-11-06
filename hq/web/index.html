@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="hq-base" content="__HQ_BASE__">
+<title>Reaper HQ</title>
+<link rel="stylesheet" href="__HQ_BASE__web/hq.css">
+<script src="__HQ_BASE__web/crash.js"></script>
+<script type="importmap">{"imports": {"three": "__HQ_BASE__node_modules/three/build/three.module.js", "three/addons/": "__HQ_BASE__node_modules/three/examples/jsm/"}}</script>
+<script type="module" src="__HQ_BASE__web/main.js"></script>
+</head>
+<body>
+<header class="bar">
+  <h1 class="mark">Reaper HQ</h1>
+  <p id="town-state" class="town-state" role="status">Connecting</p>
+  <p id="now-line" class="now-line" aria-live="polite"></p>
+  <div class="meters">
+    <div id="meter-api" class="meter" role="img" aria-label="API spend this month">
+      <span class="meter-label">API this month</span>
+      <span class="meter-value">...</span>
+      <span class="meter-track"><span class="meter-fill"></span></span>
+    </div>
+    <div id="meter-total" class="meter" role="img" aria-label="All paid spend this month">
+      <span class="meter-label">All paid spend</span>
+      <span class="meter-value">...</span>
+      <span class="meter-track"><span class="meter-fill"></span></span>
+    </div>
+    <p id="paused" class="paused" hidden></p>
+  </div>
+  <button id="demo-mode" class="btn bar-btn demo-mode" type="button" aria-pressed="false">Demo mode</button>
+  <button id="sites-open" class="btn btn-quiet bar-btn" type="button" aria-haspopup="dialog">Sites</button>
+  <button id="settings-open" class="btn btn-quiet bar-btn" type="button" aria-haspopup="dialog">Settings</button>
+  <button id="stand-down" class="stand-down" type="button">STAND DOWN</button>
+</header>
+
+<main class="stage">
+  <section class="village" aria-label="The village map">
+    <div id="map" class="map"></div>
+    <p id="map-loading" class="map-loading" role="status" hidden>Loading the village&hellip;</p>
+    <div id="graphics-reset" class="graphics-reset" role="status" hidden>
+      <p class="graphics-reset-text">Graphics reset, rebuilding&hellip;</p>
+      <button id="graphics-reload" class="btn" type="button" hidden>Reload the page</button>
+    </div>
+    <div id="slow-note" class="slow-note" role="status" hidden>
+      <p class="slow-why"></p>
+      <p>For the full look, turn on Chrome's graphics acceleration: Chrome menu &gt; Settings &gt; System &gt; "Use graphics
+        acceleration when available", then Relaunch. Check it at <code>chrome://gpu</code> (WebGL: Hardware accelerated).</p>
+      <button id="slow-close" class="btn btn-quiet" type="button">OK</button>
+    </div>
+    <div id="plates" class="plates"></div>
+    <div id="bubbles" class="bubbles" aria-hidden="true"></div>
+    <aside class="board" aria-label="The Town right now">
+      <h2 class="board-title">The Town now</h2>
+      <dl id="board-counts" class="board-counts">
+        <div class="count" data-kind="working"><dt>Working</dt><dd id="count-working">0</dd></div>
+        <div class="count" data-kind="waiting"><dt>Waiting on you</dt><dd id="count-waiting">0</dd></div>
+        <div class="count" data-kind="blocked"><dt>Blocked</dt><dd id="count-blocked">0</dd></div>
+        <div class="count" data-kind="done"><dt>Jobs done today</dt><dd id="count-done">0</dd></div>
+      </dl>
+      <ul id="board-agents" class="board-agents" aria-label="Agents"></ul>
+    </aside>
+    <div class="view-tools">
+      <button id="view-home" class="btn btn-quiet view-btn" type="button">Whole town</button>
+      <button id="view-demo" class="btn btn-quiet view-btn" type="button" aria-pressed="false">Demo drift</button>
+    </div>
+    <p id="banner" class="banner" hidden>
+      <strong>STOOD DOWN</strong>
+      <span>Everything has stopped. Nothing runs and nothing is sent. To start again, type <code>town resume</code> in a terminal.</span>
+    </p>
+    <p id="connection" class="connection" role="status" hidden></p>
+    <div class="feed-box">
+      <h2 class="feed-title">Messages</h2>
+      <ol id="feed" class="feed" aria-label="Latest messages between buildings"></ol>
+    </div>
+    <p id="tip" class="tip" hidden></p>
+    <aside id="panel" class="panel" aria-labelledby="panel-title" hidden>
+      <div class="panel-top">
+        <h2 id="panel-title" class="panel-title"></h2>
+        <button id="panel-close" class="btn btn-quiet" type="button">Close</button>
+      </div>
+      <div id="panel-body" class="panel-body"></div>
+    </aside>
+    <ul id="agent-list" class="sr-only" aria-label="Agents and their states"></ul>
+  </section>
+
+  <section id="reaper" class="reaper" aria-label="Reaper">
+    <div class="orb-box">
+      <canvas id="orb" class="orb" aria-hidden="true"></canvas>
+      <p id="orb-status" class="orb-status" role="status">Standing by</p>
+    </div>
+    <!-- Needs you: every item waiting for Charlie, in plain words (always on screen). -->
+    <section id="needs-you" class="needs-you" aria-labelledby="needs-title">
+      <h2 id="needs-title" class="needs-title">Needs you <span id="needs-count" class="needs-count">0</span></h2>
+      <div class="autopilot-row">
+        <p id="autopilot-line" class="autopilot-line" role="status">Autopilot: ...</p>
+        <button id="autopilot-go" class="btn btn-quiet autopilot-go" type="button"
+                title="Proposes starting autopilot; it starts only when you press Confirm">Go</button>
+        <button id="autopilot-stop" class="btn btn-quiet autopilot-stop" type="button" hidden
+                title="Ends the autopilot loop (nothing waiting is decided; the Town keeps running)">Stop</button>
+      </div>
+      <p id="needs-activity" class="needs-activity" aria-live="polite"></p>
+      <ol id="needs-list" class="needs-list" aria-label="Items waiting for your decision"></ol>
+    </section>
+    <div id="chat-log" class="chat-log" tabindex="0" role="log" aria-live="polite" aria-label="Conversation with Reaper">
+      <div class="msg msg-reaper"><p class="msg-who">Reaper</p>
+        <p class="msg-text">Systems online. Ask for status, the queue, or give an order. Nothing happens until you press Confirm.</p></div>
+    </div>
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <button id="mic" class="btn mic" type="button" aria-label="Hold to talk (or hold Space)">Hold to talk</button>
+      <label class="sr-only" for="chat-input">Message to Reaper</label>
+      <input id="chat-input" class="chat-input" maxlength="2000" placeholder="Talk to Reaper">
+      <button class="btn btn-send" type="submit">Send</button>
+      <button id="mute" class="btn btn-quiet mute" type="button" aria-pressed="false">Sound on</button>
+    </form>
+  </section>
+</main>
+
+<footer id="scoreboard" class="scoreboard" aria-label="Scoreboard"></footer>
+
+<div id="crash" class="crash" role="alertdialog" aria-labelledby="crash-title" aria-describedby="crash-help" hidden>
+  <h2 id="crash-title">Something went wrong on this page</h2>
+  <p id="crash-help">The Town itself is fine: this page only shows things and asks, and STAND DOWN still works.
+    Copy the details below and paste them to Claude Code.</p>
+  <pre id="crash-details" class="crash-details" tabindex="0"></pre>
+  <div class="crash-actions">
+    <button id="crash-copy" class="btn btn-send" type="button">Copy error details</button>
+    <button id="crash-reload" class="btn" type="button">Reload the page</button>
+    <button id="crash-close" class="btn btn-quiet" type="button">Close</button>
+  </div>
+</div>
+
+<dialog id="sites" class="sites" aria-labelledby="sites-title">
+  <div class="sites-top">
+    <h2 id="sites-title">Sites</h2>
+    <button id="sites-close" class="btn btn-quiet" type="button">Close</button>
+  </div>
+  <p class="sites-help">Every site the Builder made, newest first. View opens the live link once it's published,
+    otherwise the build's own files, served read-only by this page (nothing on them runs).</p>
+  <ol id="sites-list" class="sites-list" aria-label="Every build"></ol>
+</dialog>
+
+<dialog id="settings" class="settings" aria-labelledby="settings-title">
+  <h2 id="settings-title">Settings</h2>
+  <p>Voice in uses Chrome's speech service (Google). Local speech-to-text comes in R3.</p>
+  <p>Hold the mic button, or hold Space when the text box isn't selected, and talk. Let go to send.
+     Saying "Reaper, stand down" stops everything at once.</p>
+  <dl class="settings-facts">
+    <dt>Voice in</dt><dd id="voice-in"></dd>
+    <dt>Reaper's voice</dt><dd id="voice-name"></dd>
+  </dl>
+  <label class="check"><input id="set-mute" type="checkbox"> Mute Reaper's voice</label>
+  <label class="check"><input id="set-narrate" type="checkbox"> Demo narration (Reaper speaks short lines as real messages arrive)</label>
+  <label class="check"><input id="set-lite" type="checkbox"> Lighter graphics (for a slower laptop: lower resolution, no shadows)</label>
+  <button id="settings-close" class="btn btn-quiet" type="button">Close</button>
+</dialog>
+</body>
+</html>

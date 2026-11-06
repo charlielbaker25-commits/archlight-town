@@ -1,0 +1,13 @@
+# Fictional placeholder; kept dev so every external adapter uses fakes.
+instance: dev
+pack: websites
+database: state/example.db
+backup_folder: backups
+state_folder: state
+mailing_address: ""
+overture:
+  region_name: Example Town
+  center_lat: 0
+  center_lon: 0
+  radius_miles: 1
+  places_file: data/fictional.parquet

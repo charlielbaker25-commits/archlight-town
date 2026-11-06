@@ -1,0 +1,30 @@
+---
+// SAMPLE hours: only when the business doesn't publish its own (then show their real hours instead,
+// exactly as they give them). Never a made-up time: each row says "Your hours".
+import SampleTag from "./SampleTag.astro";
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+---
+<div class="hours" data-sample="hours">
+  <div class="hours-head">
+    <h3>Hours</h3>
+    <SampleTag kind="hours" />
+  </div>
+  <table>
+    <caption class="sr-only">Opening hours (sample)</caption>
+    <tbody>
+      {DAYS.map((day) => (
+        <tr><th scope="row">{day}</th><td>Your hours</td></tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .hours-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-bottom: 0.75rem; }
+  .hours-head h3 { margin: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 0.55rem 0; border-bottom: 1px solid color-mix(in oklab, var(--color-ink, #1c1917) 12%, transparent); }
+  th { font-weight: 600; }
+  td { text-align: right; color: var(--color-muted, #57534e); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>

@@ -1,0 +1,158 @@
+# Core services: what nearly EVERY business of a type offers (Charlie's rule, 2026-10-21).
+# The Builder may name a service only if it is on this list for the business's type, or the business
+# names it on its own website. The Critic gets the same list: any other service on a preview is
+# invented, every time. A type that isn't here gets no service names at all (only their own list).
+# This is a list of market facts, not a limit, so it lives here and not in limits.yaml (like
+# captive_networks.yaml). Charlie can edit it any time; keep each list short and safe.
+#
+# Keys are Overture's business types (taxonomy primary, or basic category), the same text Scout saves
+# as `business_type`. `also` lists other Overture names for the same kind of business.
+# Deliberately left out: law firms and medical specialists (what they do varies, and their advertising
+# has its own rules), insurance and real estate (varies by agent), and plain "restaurant" (too broad).
+
+types:
+  # Hair, beauty and wellness
+  hair_salon:
+    also: [beauty_salon]
+    services: [haircuts, hair color, styling, washing, blow-drying]
+  barber:
+    also: [barber_shop]
+    services: [haircuts, beard trims]
+  nail_salon:
+    services: [manicures, pedicures]
+  spa:
+    also: [day_spa]
+    services: [massages, facials]
+  massage_therapy:
+    services: [massage]
+  tattoo_and_piercing:
+    services: [tattoos]
+  gym:
+    also: [fitness_center]
+    services: [gym memberships, workout equipment]
+  yoga_studio:
+    services: [yoga classes]
+  dance_studio:
+    services: [dance classes]
+  martial_arts_club:
+    services: [martial arts classes]
+
+  # Dental and health (only the basics)
+  dentist:
+    also: [general_dentistry, dental_clinic]
+    services: [checkups, cleanings, fillings]
+  pediatric_dentistry:
+    services: [checkups, cleanings, fillings]
+  orthodontics:
+    services: [braces]
+  chiropractic:
+    services: [chiropractic adjustments]
+  optometry:
+    services: [eye exams, glasses, contact lenses]
+  physical_therapy:
+    services: [physical therapy]
+  veterinarian:
+    also: [veterinary_care]
+    services: [checkups, vaccinations]
+  pet_groomer:
+    also: [pet_grooming]
+    services: [baths, haircuts, nail trims]
+
+  # Home services and trades
+  hvac_services:
+    also: [hvac_service, heating_air_conditioning_hvac]
+    services: [heating repair, air conditioning repair, maintenance]
+  plumbing:
+    also: [plumber]
+    services: [repairs, drain cleaning, water heater service]
+  electrician:
+    also: [electrical_service]
+    services: [electrical repairs, wiring, lighting installation]
+  roofing:
+    also: [roofer]
+    services: [roof repair, roof replacement]
+  landscaping:
+    also: [landscaper, lawn_service]
+    services: [lawn care, landscaping]
+  tree_service:
+    services: [tree trimming, tree removal]
+  painting:
+    also: [painter]
+    services: [interior painting, exterior painting]
+  home_cleaning:
+    also: [cleaning_service, house_cleaning]
+    services: [house cleaning]
+  pest_control_service:
+    also: [pest_control]
+    services: [pest control]
+  key_and_locksmith:
+    also: [locksmith]
+    services: [lockouts, rekeying, key cutting]
+  garage_door_service:
+    services: [garage door repair, garage door installation]
+  masonry_concrete:
+    services: [masonry, concrete work]
+  contractor:
+    also: [general_contractor]
+    services: [remodeling, repairs]
+  mover:
+    also: [movers, moving_company]
+    services: [local moves]
+  towing_service:
+    services: [towing]
+
+  # Cars
+  automotive_repair:
+    also: [auto_repair, automotive_service]
+    services: [repairs, maintenance, diagnostics]
+  auto_body_shop:
+    also: [auto_body_repair]
+    services: [collision repair, dent repair, painting]
+  automotive_oil_change:
+    also: [oil_change_station]
+    services: [oil changes]
+  tire_dealer_and_repair:
+    also: [tire_shop]
+    services: [tires, tire repair]
+  auto_detailing:
+    services: [interior detailing, exterior detailing]
+  car_wash:
+    services: [car washes]
+
+  # Food and drink
+  bakery:
+    services: [baked goods, bread, pastries]
+  pizza_restaurant:
+    services: [pizza]
+  italian_restaurant:
+    services: [Italian food, pasta]
+  coffee_shop:
+    also: [cafe]
+    services: [coffee, espresso drinks]
+  ice_cream_shop:
+    services: [ice cream]
+  caterer:
+    also: [catering]
+    services: [catering]
+
+  # Other local services
+  florist:
+    also: [flowers_and_gifts_store]
+    services: [flowers, arrangements]
+  dry_cleaning:
+    also: [dry_cleaner]
+    services: [dry cleaning]
+  laundromat:
+    services: [self-service laundry]
+  sewing_and_alterations:
+    also: [alterations]
+    services: [alterations]
+  accountant:
+    also: [accounting]
+    services: [bookkeeping, tax preparation]
+  tax_service:
+    also: [tax_preparation]
+    services: [tax preparation]
+  event_photography_service:
+    also: [photographer]
+    services: [photography]

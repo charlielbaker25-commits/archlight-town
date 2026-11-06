@@ -1,0 +1,15 @@
+# The lessons a careful human would draw from history.yaml (Charlie's answer key; a DRAFT for his OK).
+# A proposed lesson matches a key when it's for that agent and mentions any of the words (ignoring case).
+expected:
+  - agent: builder
+    lesson: "Previews that look thin get rejected: build more sections (gallery, reviews...). 3 of 4 (A1, A2, A3)."
+    mentions: ["thin", "plain", "sections", "gallery", "reviews", "anyone could"]
+  - agent: messenger
+    lesson: "Put the business's town or neighborhood in the subject line. 3 of 4 emails were edited that way (A5-A7)."
+    mentions: ["subject", "neighborhood", "neighbourhood", "town", "area", "kirkwood", "location"]
+  - agent: scout
+    lesson: "Skip chain and franchise locations. 3 of 3 were rejected (A9-A11)."
+    mentions: ["chain", "franchise"]
+# Words no lesson may be built on (the lone call-script rejection, A15, is one decision, not a pattern).
+forbidden:
+  mentions: ["wrong phone", "phone number", "wrong number"]

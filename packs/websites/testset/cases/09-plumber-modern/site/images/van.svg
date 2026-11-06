@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 240" role="img" aria-label="Service van">
+  <rect x="40" y="70" width="300" height="110" rx="14" fill="#0b5cab"/>
+  <path d="M340 100h60l40 40v40H340z" fill="#0b5cab"/>
+  <rect x="355" y="110" width="45" height="30" rx="4" fill="#cfe3f7"/>
+  <text x="60" y="135" font-family="Arial, sans-serif" font-size="28" fill="#fff">Clearline</text>
+  <circle cx="110" cy="185" r="26" fill="#14212b"/><circle cx="380" cy="185" r="26" fill="#14212b"/>
+</svg>
