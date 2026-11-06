@@ -448,7 +448,7 @@ def test_the_real_client_resolves_by_public_dns_and_keeps_the_hostname_and_finds
 
 # ---------------- invalid public emails (lead #12 Fictional Corner Shop) ----------------
 
-FICTIONAL = "lead@example.com"
+FICTIONAL = "fictional'splace01@gmail.com"
 
 
 @pytest.mark.parametrize("address, ok", [

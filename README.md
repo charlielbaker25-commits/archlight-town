@@ -1,9 +1,12 @@
 # The Town
 
-A real website business run by AI agents, with one human approval per prospect.
-The agents find businesses that need a better website, build a private sample,
-check it, and prepare the first email. Charlie reviews the site and email as one
-outreach package. Only his approval can publish that preview and release its email.
+**A real website business run by AI agents, with one human approval per prospect.**
+13 agent roles find local businesses with weak websites, build and review a private
+sample site, and draft the first email. Charlie approves each site and email as one
+package; nothing reaches a prospect without that approval.
+
+**22 sites built · 1,096 tests passing · $0.02 total API spend** (about $0.001 per
+build; building and reviewing run on a $20/month Claude plan, not the API).
 
 This is the public engineering showcase. All businesses shown here are fictional
 test-set businesses. Operational records, credentials and private history are excluded.
@@ -71,15 +74,11 @@ through `claude -p`**; writing uses **Sonnet through `claude -p`**. Model routin
 lives in the pack configuration. The subprocess removes `ANTHROPIC_API_KEY` so
 subscription jobs do not silently become API charges.
 
-1,190 tests collected in the private source checkout; 13 agent roles. 26 saved leads; 22 completed non-test builds. Measured lifetime Haiku API spend: $0.024318; amortized per build: $0.001105; per saved lead: $0.000935.
-
-The exported counts are aggregates only. Cost per build and per lead, when
-present, divide lifetime logged Haiku API spend by completed non-test builds and
-saved leads respectively. These are amortized figures, not a traced marginal
-cost for one prospect. They include other Haiku work and exclude the Claude
-subscription, hosting, human time and hypothetical API-equivalent build prices.
-The test count is collection from the source checkout, not a claim that every
-test passed or every test is in the public snapshot. `docs/stats.json` records it.
+**Numbers so far:** 13 agent roles, 26 saved leads, 22 completed builds, and
+$0.024 in total Haiku API spend, about $0.001 per build. That per-build figure
+divides all logged API spend by completed builds. It doesn't include the Claude
+subscription, hosting or human time. 1,096 tests pass in this repository
+(`pytest`, including the browser tests); `docs/stats.json` records the counts.
 
 The Town does not retrain a model. It keeps events, decisions, rejection reasons
 and edits as evidence. The Librarian proposes short lessons; a playbook change

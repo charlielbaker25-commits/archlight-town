@@ -6,5 +6,6 @@
   "builds": 22,
   "api_usd": 0.024318,
   "api_usd_per_build": 0.001105,
-  "api_usd_per_lead": 0.000935
+  "api_usd_per_lead": 0.000935,
+  "tests_passing_public": 1096
 }

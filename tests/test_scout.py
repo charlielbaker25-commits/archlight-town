@@ -394,10 +394,10 @@ def test_every_saved_lead_keeps_its_google_check_link(town):
 
 
 def test_a_pick_with_an_invalid_email_is_never_saved_and_says_why(town):
-    """Lead #12 Fictional Corner Shop: Overture lists "lead@example.com". Gmail addresses can't hold an apostrophe,
+    """Lead #12 Fictional Corner Shop: Overture lists "fictional'splace01@gmail.com". Gmail addresses can't hold an apostrophe,
     so it would bounce; with leads saved automatically, plain code catches it before saving."""
     from packs.websites import scout as scout_mod
-    place = {"source_id": "x12", "name": "Fictional Corner Shop", "phone": "+13145550112", "email": "lead@example.com",
+    place = {"source_id": "x12", "name": "Fictional Corner Shop", "phone": "+13145550112", "email": "fictional'splace01@gmail.com",
              "website": None, "locality": "Clayton", "release": "r"}
     problems = scout_mod.auto_save_problems(town, place, scout_mod.lead_content(place))
-    assert problems == ["email address looks invalid: lead@example.com (it has a space, quote or apostrophe)"]
+    assert problems == ["email address looks invalid: fictional'splace01@gmail.com (it has a space, quote or apostrophe)"]
